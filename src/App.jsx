@@ -475,7 +475,17 @@ function App() {
                   Explore Live Projects <ChevronRight size={16} />
                 </a>
 
-                <div className="flex items-center gap-1 pl-2">
+                <div className="flex items-center gap-1.5 pl-1">
+                  <a
+                    href="https://portfolio-ganesh-mishra.vercel.app/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="focus-ring rounded-xl border border-slate-800 bg-slate-900/80 p-3 text-slate-400 transition-all hover:border-teal-500/50 hover:text-accent"
+                    aria-label="Live Portfolio Website"
+                    title="https://portfolio-ganesh-mishra.vercel.app/"
+                  >
+                    <Globe size={20} />
+                  </a>
                   <a
                     href="https://github.com/leviwof"
                     target="_blank"
@@ -776,6 +786,10 @@ function App() {
         <div className="shell flex flex-col items-center justify-between gap-4 text-sm text-slate-400 sm:flex-row">
           <p>© {new Date().getFullYear()} Ganesh Mishra. Designed &amp; Engineered with React &amp; Tailwind CSS.</p>
           <div className="flex items-center gap-4">
+            <a href="https://portfolio-ganesh-mishra.vercel.app/" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
+              Portfolio
+            </a>
+            <span className="text-slate-700">•</span>
             <a href="https://github.com/leviwof" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
               GitHub
             </a>
