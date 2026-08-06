@@ -1,148 +1,834 @@
 import { useEffect, useState } from 'react'
-import { ArrowUpRight, Mail, Menu, X } from 'lucide-react'
-import profilePhoto from './assets-profile.jpg'
+import {
+  ArrowUpRight, Mail, Menu, X, ExternalLink,
+  Sparkles, Monitor, ShieldCheck, Layers, Cpu,
+  Check, Copy, Eye, Zap, ChevronRight, Maximize2, Lock, Code2, Globe, Database, Cloud, Terminal
+} from 'lucide-react'
 
-const navItems = ['About', 'Skills', 'Experience', 'Projects', 'Contact']
+import profilePhoto from './assets-profile.jpg'
+import vendingKioskImg from './assets/vending_kiosk.jpg'
+import ayurvedicWebImg from './assets/ayurvedic_web.jpg'
+import aiLoanImg from './assets/ai_loan.jpg'
+import investmentDashImg from './assets/investment_dash.jpg'
+import aiChatbotImg from './assets/ai_chatbot.jpg'
+
+const navItems = ['About', 'Skills', 'Projects', 'Experience', 'Contact']
 
 const skillGroups = [
-  { title: 'Backend', skills: ['Node.js', 'Express.js', 'NestJS', 'Socket.io', 'PHP', 'Java', 'Python', 'RESTful APIs', 'GraphQL', 'Microservices'] },
-  { title: 'Frontend', skills: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React.js', 'Redux', 'Next.js', 'Vue.js', 'Tailwind CSS', 'Flutter'] },
-  { title: 'Databases', skills: ['MongoDB', 'PostgreSQL', 'MySQL', 'Supabase', 'Firebase', 'Redis'] },
-  { title: 'Cloud & DevOps', skills: ['AWS', 'AWS EC2', 'Microsoft Azure', 'Docker', 'Jenkins', 'GitHub Actions', 'CI/CD pipelines', 'PM2'] },
-  { title: 'Security & Integration', skills: ['JWT', 'RBAC', 'Razorpay', 'Firebase', 'LLM integration', 'Cybersecurity awareness', 'Git', 'Linux', 'Shell scripting', 'Kafka'] },
+  {
+    title: 'Backend Engineering',
+    icon: Terminal,
+    color: 'text-teal-400 bg-teal-500/10 border-teal-500/20',
+    skills: ['Node.js', 'Express.js', 'NestJS', 'Socket.io', 'PHP', 'Java', 'Python', 'RESTful APIs', 'GraphQL', 'Microservices']
+  },
+  {
+    title: 'Frontend & UI Frameworks',
+    icon: Monitor,
+    color: 'text-indigo-400 bg-indigo-500/10 border-indigo-500/20',
+    skills: ['JavaScript (ES6+)', 'TypeScript', 'React.js', 'Redux', 'Next.js', 'Vue.js', 'Tailwind CSS', 'HTML5/CSS3', 'Flutter']
+  },
+  {
+    title: 'Databases & Storage',
+    icon: Database,
+    color: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
+    skills: ['MongoDB', 'PostgreSQL', 'MySQL', 'Supabase', 'Firebase', 'Redis']
+  },
+  {
+    title: 'Cloud & DevOps Architecture',
+    icon: Cloud,
+    color: 'text-purple-400 bg-purple-500/10 border-purple-500/20',
+    skills: ['AWS (EC2/S3)', 'Microsoft Azure', 'Docker', 'Jenkins', 'GitHub Actions', 'CI/CD Pipelines', 'PM2', 'Nginx']
+  },
+  {
+    title: 'Security & Integrations',
+    icon: ShieldCheck,
+    color: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
+    skills: ['JWT Authentication', 'RBAC', 'Razorpay Gateway', 'Firebase Services', 'LLM / OpenAI API', 'Kafka', 'Git', 'Linux / Shell']
+  },
 ]
 
 const experience = [
   {
-    company: 'Zenzio Technologies', role: 'Full Stack Developer', duration: 'Apr 2025 — Present', location: '—',
+    company: 'Zenzio Technologies',
+    role: 'Full Stack Developer',
+    duration: 'Apr 2025 — Present',
+    location: 'Mumbai, India',
+    badge: 'Current Role',
     bullets: [
-      'Developed and maintained scalable web applications using React.js, Node.js, NestJS, and TypeScript.',
-      'Designed REST APIs for restaurant management, order processing, customer management, and admin operations, with JWT-based RBAC.',
-      'Built product features spanning orders, menus, offers, delivery tracking, analytics, and payments, including Razorpay and Firebase integrations.',
-      'Implemented GitHub Actions CI/CD pipelines and deployed applications to AWS EC2 with PM2 while improving API performance and stability.',
+      'Architected and deployed enterprise scalable web applications utilizing React.js, Node.js, NestJS, and TypeScript.',
+      'Designed high-throughput REST APIs for restaurant management, order processing, and administrative controls with fine-grained JWT RBAC security.',
+      'Engineered critical product suites including menus, live delivery tracking, analytics, and multi-channel payment flows (Razorpay & Firebase).',
+      'Automated deployment pipelines with GitHub Actions and AWS EC2 with PM2, boosting API performance and operational stability.',
     ],
   },
   {
-    company: 'HDFC ERGO', role: 'AI and Automation Engineer', duration: 'May 2025 — Nov 2025', location: 'Bhandup, Mumbai',
+    company: 'HDFC ERGO',
+    role: 'AI and Automation Engineer',
+    duration: 'May 2025 — Nov 2025',
+    location: 'Bhandup, Mumbai',
     bullets: [
-      'Contributed to the onboarding system, helping make customer verification 25% faster while strengthening KYC compliance.',
-      'Worked with 5+ cross-functional teams to deliver scalable KYC solutions ahead of deadlines and improve project efficiency by 20%.',
-      'Reduced onboarding errors by 30% through proactive monitoring, testing, and workflow optimization.',
+      'Engineered intelligent customer onboarding modules, accelerating verification speed by 25% while reinforcing strict KYC compliance.',
+      'Collaborated across 5+ engineering and compliance teams to ship scalable KYC automation solutions ahead of roadmap schedules.',
+      'Reduced onboarding data errors by 30% through comprehensive automated testing and proactive workflow monitoring.',
     ],
   },
   {
-    company: 'Niyogin Fintech Ltd', role: 'Full-Stack Web Developer', duration: 'May 2023 — Apr 2025', location: 'Vidyavihar, Mumbai',
+    company: 'Niyogin Fintech Ltd',
+    role: 'Full-Stack Web Developer',
+    duration: 'May 2023 — Apr 2025',
+    location: 'Vidyavihar, Mumbai',
     bullets: [
-      'Built the Niyoblu loan platform, streamlining loan access and onboarding for 100,000 users.',
-      'Engineered end-to-end microservices that increased loan approval rates by 15% and user engagement by 30% within six months.',
-      'Implemented CI/CD pipelines that reduced deployment time by 40% and enabled faster product iterations.',
+      'Built the core Niyoblu digital loan platform, streamlining onboarding and credit workflows for 100,000+ users.',
+      'Designed end-to-end microservices that increased credit approval throughput by 15% and user engagement by 30%.',
+      'Implemented robust CI/CD deployment pipelines that cut release cycles by 40% for rapid product iteration.',
     ],
   },
 ]
 
 const projects = [
-  { name: 'AI Loan Dashboard', description: 'AI-assisted loan decisions and real-time notifications that improved approval efficiency by 15%.', tags: ['React', 'Node.js', 'Docker', 'CI/CD'] },
-  { name: 'Investment Dashboard', description: 'Real-time portfolio tracking and interactive analytics, built for speed and continuous availability.', tags: ['React', 'Node.js', 'Microservices', 'Docker'] },
-  { name: 'AI Chatbot', description: 'Customer support automation that cut response time by 50% while improving the user experience.', tags: ['Node.js', 'React', 'AI integration', 'Docker'] },
+  {
+    id: 'vending-kiosk',
+    name: 'Vending Machine Kiosk UI',
+    subtitle: 'Touchscreen Ordering & Kiosk Telemetry Interface',
+    description: 'High-responsiveness digital vending kiosk interface engineered for automated snack & beverage ordering. Features live product grid, touch-optimized interaction model, real-time cart state calculation, and sleek commercial kiosk telemetry UI.',
+    image: vendingKioskImg,
+    liveUrl: 'https://vending-ui-six.vercel.app/kiosk',
+    githubUrl: 'https://github.com/leviwof',
+    category: 'Web & Kiosk Apps',
+    featured: true,
+    badge: 'Live Kiosk App',
+    badgeColor: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30',
+    displayUrl: 'vending-ui-six.vercel.app/kiosk',
+    tags: ['React', 'Vite', 'Touchscreen UI', 'State Machine', 'Tailwind CSS', 'Kiosk Telemetry'],
+    highlights: [
+      'Touch-optimized digital menu grid with fast category filtering',
+      'Real-time order cart state calculation & tactile item selection',
+      'High-contrast UI designed for commercial hardware displays',
+    ]
+  },
+  {
+    id: 'ayurvedic-web',
+    name: 'Ayurvedic Healthcare & E-Commerce Platform',
+    subtitle: 'Holistic Herbal Wellness & Consultation Portal',
+    description: 'Full-featured web application for Ayurvedic wellness products and consultation services. Includes interactive product catalog, natural remedy assessments, appointment booking UI, and modern responsive e-commerce storefront.',
+    image: ayurvedicWebImg,
+    liveUrl: 'https://ayurvedic-web-ui.vercel.app/',
+    githubUrl: 'https://github.com/leviwof',
+    category: 'Web & Kiosk Apps',
+    featured: true,
+    badge: 'Live E-Commerce App',
+    badgeColor: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
+    displayUrl: 'ayurvedic-web-ui.vercel.app',
+    tags: ['React', 'Tailwind CSS', 'Healthcare UI', 'E-Commerce', 'REST APIs', 'Responsive Web'],
+    highlights: [
+      'Curated organic herbal catalog with detailed modal views',
+      'Interactive wellness consultation & remedy finder UI',
+      'Seamless mobile-first responsive shopping experience',
+    ]
+  },
+  {
+    id: 'ai-loan-dashboard',
+    name: 'AI Loan Approval & Credit Assessment Dashboard',
+    subtitle: 'Fintech Credit Decisioning & Underwriting Platform',
+    description: 'AI-assisted loan decision engine and automated notification platform. Streamlined underwriting workflows and risk assessment, boosting approval efficiency by 15% across 100,000+ customer records.',
+    image: aiLoanImg,
+    liveUrl: null,
+    githubUrl: 'https://github.com/leviwof',
+    category: 'AI & Fintech',
+    featured: true,
+    badge: 'Fintech Platform',
+    badgeColor: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/30',
+    displayUrl: 'niyoblu.fintech.internal/loans',
+    tags: ['React', 'Node.js', 'Docker', 'Microservices', 'CI/CD', 'Fintech'],
+    highlights: [
+      'Real-time automated credit risk scoring pipeline',
+      'Interactive visual decision analytics for underwriters',
+      'High-scale microservices processing 100k+ customer accounts',
+    ]
+  },
+  {
+    id: 'investment-dashboard',
+    name: 'Real-Time Investment & Portfolio Dashboard',
+    subtitle: 'High-Frequency Asset & Stock Analytics UI',
+    description: 'Real-time portfolio tracking platform with live streaming graphs, market sentiment feeds, and interactive asset breakdown built for continuous high availability and instant responsiveness.',
+    image: investmentDashImg,
+    liveUrl: null,
+    githubUrl: 'https://github.com/leviwof',
+    category: 'AI & Fintech',
+    featured: false,
+    badge: 'Analytics UI',
+    badgeColor: 'bg-purple-500/10 text-purple-400 border-purple-500/30',
+    displayUrl: 'portfolio.analytics.dev',
+    tags: ['React', 'Node.js', 'WebSockets', 'Microservices', 'Tailwind CSS'],
+    highlights: [
+      'Live streaming candlestick stock analytics charts',
+      'Portfolio asset allocation pie & performance trend tracking',
+    ]
+  },
+  {
+    id: 'ai-chatbot',
+    name: 'Automated AI Customer Support Chatbot',
+    subtitle: 'LLM Powered Support & Ticket Automation',
+    description: 'Intelligent conversational assistant that reduced customer response times by 50%. Integrated LLM prompt engineering, automated intent recognition, and smooth escalation fallbacks.',
+    image: aiChatbotImg,
+    liveUrl: null,
+    githubUrl: 'https://github.com/leviwof',
+    category: 'AI & Fintech',
+    featured: false,
+    badge: 'AI Assistant',
+    badgeColor: 'bg-amber-500/10 text-amber-400 border-amber-500/30',
+    displayUrl: 'support.ai-bot.internal',
+    tags: ['Node.js', 'React', 'LLM Integration', 'Docker', 'Tailwind CSS'],
+    highlights: [
+      '50% reduction in customer support response latency',
+      'Context-aware knowledge base lookup and intelligent ticket routing',
+    ]
+  }
 ]
 
-function Github({ size = 20 }) {
-  return <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .7a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2.23c-3.22.7-3.9-1.36-3.9-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.77 2.72 1.26 3.38.96.1-.75.4-1.26.74-1.55-2.57-.3-5.27-1.29-5.27-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.16 1.18A10.98 10.98 0 0 1 12 6.12c.98 0 1.95.13 2.87.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.71 5.39-5.29 5.68.42.36.79 1.06.79 2.15v3.25c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z" /></svg>
+function GithubIcon({ size = 20 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 .7a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2.23c-3.22.7-3.9-1.36-3.9-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.77 2.72 1.26 3.38.96.1-.75.4-1.26.74-1.55-2.57-.3-5.27-1.29-5.27-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.16 1.18A10.98 10.98 0 0 1 12 6.12c.98 0 1.95.13 2.87.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.71 5.39-5.29 5.68.42.36.79 1.06.79 2.15v3.25c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z" />
+    </svg>
+  )
 }
 
-function Linkedin({ size = 20 }) {
-  return <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.37 3.5a2.18 2.18 0 1 1 0 4.36 2.18 2.18 0 0 1 0-4.36ZM3.49 9.5h3.76V21H3.49V9.5Zm5.93 0h3.6v1.57h.05c.5-.95 1.73-1.96 3.56-1.96 3.81 0 4.51 2.51 4.51 5.77V21h-3.75v-5.42c0-1.29-.03-2.96-1.81-2.96-1.8 0-2.08 1.41-2.08 2.87V21H9.42V9.5Z" /></svg>
+function LinkedinIcon({ size = 20 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M5.37 3.5a2.18 2.18 0 1 1 0 4.36 2.18 2.18 0 0 1 0-4.36ZM3.49 9.5h3.76V21H3.49V9.5Zm5.93 0h3.6v1.57h.05c.5-.95 1.73-1.96 3.56-1.96 3.81 0 4.51 2.51 4.51 5.77V21h-3.75v-5.42c0-1.29-.03-2.96-1.81-2.96-1.8 0-2.08 1.41-2.08 2.87V21H9.42V9.5Z" />
+    </svg>
+  )
 }
 
 function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16)
-    onScroll(); window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
   useEffect(() => {
     const close = () => setOpen(false)
     window.addEventListener('resize', close)
     return () => window.removeEventListener('resize', close)
   }, [])
+
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-200 ${scrolled || open ? 'border-b border-slate-800 bg-ink/95 backdrop-blur-md' : 'bg-transparent'}`}>
-      <nav className="shell flex h-16 items-center justify-between" aria-label="Primary navigation">
-        <a href="#top" className="focus-ring rounded text-lg font-semibold tracking-tight text-white" aria-label="Ganesh Mishra, home">GM<span className="text-accent">.</span></a>
-        <div className="hidden items-center gap-7 md:flex">{navItems.map((item) => <a key={item} href={`#${item.toLowerCase()}`} className="focus-ring rounded text-sm text-slate-400 transition-colors hover:text-white">{item}</a>)}</div>
-        <button type="button" onClick={() => setOpen(!open)} className="focus-ring rounded-md p-2 text-slate-300 md:hidden" aria-expanded={open} aria-label="Toggle menu">{open ? <X size={21} /> : <Menu size={21} />}</button>
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        scrolled || open
+          ? 'border-b border-slate-800/80 bg-ink/90 backdrop-blur-xl shadow-lg shadow-black/40'
+          : 'bg-transparent'
+      }`}
+    >
+      <nav className="shell flex h-20 items-center justify-between" aria-label="Primary navigation">
+        <a href="#top" className="focus-ring group flex items-center gap-3 rounded-lg text-xl font-bold tracking-tight text-white">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-teal-500 to-indigo-600 font-extrabold text-slate-950 shadow-md shadow-teal-500/20 transition-transform group-hover:scale-105">
+            GM
+          </span>
+          <div className="flex flex-col">
+            <span className="text-base font-extrabold leading-tight tracking-tight text-white">
+              Ganesh Mishra<span className="text-accent">.</span>
+            </span>
+            <span className="text-[11px] font-medium text-slate-400">Full-Stack Engineer</span>
+          </div>
+        </a>
+
+        <div className="hidden items-center gap-8 md:flex">
+          {navItems.map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className="focus-ring rounded-md text-sm font-medium text-slate-300 transition-colors hover:text-accent"
+            >
+              {item}
+            </a>
+          ))}
+          <a
+            href="mailto:ganesh.stack21@gmail.com"
+            className="focus-ring inline-flex items-center gap-2 rounded-full border border-teal-500/30 bg-teal-500/10 px-4 py-2 text-xs font-semibold text-accent transition-all hover:bg-teal-500/20 hover:border-teal-500/50"
+          >
+            <Mail size={14} /> Hire Me
+          </a>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setOpen(!open)}
+          className="focus-ring rounded-lg border border-slate-800 bg-slate-900/60 p-2.5 text-slate-300 md:hidden"
+          aria-expanded={open}
+          aria-label="Toggle menu"
+        >
+          {open ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </nav>
-      {open && <div className="shell border-t border-slate-800 py-3 md:hidden">{navItems.map((item) => <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setOpen(false)} className="block rounded-md px-2 py-3 text-sm text-slate-300 hover:bg-slate-800/60 hover:text-white">{item}</a>)}</div>}
+
+      {open && (
+        <div className="shell border-t border-slate-800/80 bg-slate-950/95 py-4 backdrop-blur-2xl md:hidden">
+          <div className="flex flex-col space-y-2">
+            {navItems.map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                onClick={() => setOpen(false)}
+                className="block rounded-lg px-4 py-3 text-base font-medium text-slate-200 hover:bg-slate-800/80 hover:text-accent"
+              >
+                {item}
+              </a>
+            ))}
+            <a
+              href="mailto:ganesh.stack21@gmail.com"
+              onClick={() => setOpen(false)}
+              className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-accent py-3 text-sm font-semibold text-slate-950"
+            >
+              <Mail size={16} /> Contact Ganesh
+            </a>
+          </div>
+        </div>
+      )}
     </header>
   )
 }
 
-function SocialLink({ href, label, children }) {
-  return <a href={href} target="_blank" rel="noreferrer" aria-label={label} className="focus-ring rounded-md p-2 text-slate-400 transition-colors hover:bg-slate-800 hover:text-white">{children}</a>
+function ProjectCard({ project, onPreviewModal }) {
+  return (
+    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-slate-700 hover:bg-slate-900/90 hover:shadow-2xl hover:shadow-teal-500/10">
+      {/* Realistic Browser Window Top Bar Frame */}
+      <div className="flex items-center justify-between border-b border-slate-800/90 bg-slate-950/90 px-4 py-3">
+        <div className="flex items-center gap-2">
+          <span className="h-3 w-3 rounded-full bg-[#FF5F56] shadow-sm shadow-red-500/50" />
+          <span className="h-3 w-3 rounded-full bg-[#FFBD2E] shadow-sm shadow-amber-500/50" />
+          <span className="h-3 w-3 rounded-full bg-[#27C93F] shadow-sm shadow-emerald-500/50" />
+        </div>
+        <div className="flex max-w-[240px] sm:max-w-[320px] flex-1 items-center justify-center gap-1.5 rounded-md border border-slate-800 bg-slate-900/90 px-3 py-1 text-xs text-slate-400">
+          <Lock size={12} className="text-emerald-400 shrink-0" />
+          <span className="truncate font-mono text-[11px] text-slate-300">{project.displayUrl}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          {project.liveUrl && (
+            <span className="inline-flex h-2 w-2 animate-ping rounded-full bg-emerald-400" />
+          )}
+        </div>
+      </div>
+
+      {/* Project Image Frame Showcase */}
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-950">
+        <img
+          src={project.image}
+          alt={project.name}
+          className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 transition-opacity group-hover:opacity-60" />
+
+        {/* Floating Category Badge */}
+        <div className="absolute left-4 top-4 flex items-center gap-2">
+          <span className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold backdrop-blur-md ${project.badgeColor}`}>
+            <Sparkles size={12} />
+            {project.badge}
+          </span>
+        </div>
+
+        {/* Action Overlay Button */}
+        <div className="absolute bottom-4 right-4 flex items-center gap-2">
+          {project.liveUrl ? (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="focus-ring inline-flex items-center gap-1.5 rounded-xl bg-accent px-4 py-2 text-xs font-bold text-slate-950 shadow-lg shadow-teal-500/20 transition-all hover:bg-teal-300 hover:scale-105"
+            >
+              Live Demo <ArrowUpRight size={14} />
+            </a>
+          ) : (
+            <button
+              onClick={() => onPreviewModal(project)}
+              className="focus-ring inline-flex items-center gap-1.5 rounded-xl border border-slate-700 bg-slate-900/90 px-3.5 py-2 text-xs font-semibold text-slate-200 backdrop-blur-md hover:border-slate-500 hover:bg-slate-800"
+            >
+              <Eye size={14} /> Details
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Content Area */}
+      <div className="flex flex-1 flex-col p-6 sm:p-7">
+        <div className="flex items-start justify-between gap-2">
+          <div>
+            <h3 className="text-xl font-bold text-white transition-colors group-hover:text-accent">
+              {project.name}
+            </h3>
+            <p className="mt-1 text-xs font-medium text-slate-400">{project.subtitle}</p>
+          </div>
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="focus-ring rounded-lg border border-slate-800 bg-slate-900/60 p-2 text-slate-400 transition-colors hover:border-slate-700 hover:text-white shrink-0"
+              aria-label="View on GitHub"
+            >
+              <GithubIcon size={18} />
+            </a>
+          )}
+        </div>
+
+        <p className="mt-4 flex-1 text-sm leading-relaxed text-slate-300/90">
+          {project.description}
+        </p>
+
+        {/* Key Highlights */}
+        {project.highlights && (
+          <ul className="mt-4 space-y-1.5 border-t border-slate-800/80 pt-4 text-xs text-slate-400">
+            {project.highlights.map((item, idx) => (
+              <li key={idx} className="flex items-center gap-2">
+                <Check size={14} className="text-accent shrink-0" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {/* Tech Stack Tags */}
+        <div className="mt-6 flex flex-wrap gap-1.5 border-t border-slate-800/80 pt-4">
+          {project.tags.map((tag) => (
+            <span key={tag} className="tag">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </article>
+  )
 }
 
 function App() {
+  const [activeTab, setActiveTab] = useState('All')
+  const [copied, setCopied] = useState(false)
+  const [selectedProjectModal, setSelectedProjectModal] = useState(null)
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText('ganesh.stack21@gmail.com')
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2500)
+  }
+
+  const filteredProjects = activeTab === 'All'
+    ? projects
+    : projects.filter(p => p.category === activeTab)
+
   return (
-    <div id="top" className="min-h-screen overflow-x-hidden bg-ink">
+    <div id="top" className="min-h-screen bg-ink text-slate-100 selection:bg-accent/30 selection:text-white">
+      {/* Background Ambient Glow Effects */}
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+        <div className="absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full bg-teal-500/10 blur-[130px]" />
+        <div className="absolute right-0 top-1/4 h-[600px] w-[600px] rounded-full bg-indigo-600/10 blur-[150px]" />
+        <div className="absolute bottom-10 left-1/3 h-[500px] w-[500px] rounded-full bg-purple-600/10 blur-[140px]" />
+      </div>
+
       <Header />
-      <main>
-        <section className="shell flex min-h-[90vh] items-center pb-20 pt-32 sm:pb-24 sm:pt-40">
-          <div className="grid w-full items-center gap-14 lg:grid-cols-[1fr_360px] lg:gap-24">
+
+      <main className="relative z-10">
+        {/* HERO SECTION */}
+        <section className="shell flex min-h-[92vh] items-center pb-16 pt-32 sm:pb-24 sm:pt-40">
+          <div className="grid w-full items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
             <div className="max-w-3xl">
-              <p className="mb-5 flex items-center gap-3 text-sm font-medium text-slate-400"><span className="h-px w-8 bg-accent" /> Hello, I’m Ganesh</p>
-              <h1 className="text-5xl font-semibold leading-[1.06] tracking-[-0.04em] text-white sm:text-6xl lg:text-7xl">Backend &amp;<br /><span className="text-slate-400">Full-Stack Engineer.</span></h1>
-              <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-400">I build scalable web applications and high-performance, AI-enabled products with JavaScript, Node.js, React, and cloud-native tools.</p>
-              <div className="mt-9 flex flex-wrap items-center gap-3">
-                <a href={`${import.meta.env.BASE_URL}Ganesh_Mishra_Resume.pdf`} target="_blank" rel="noreferrer" className="focus-ring inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-teal-300">View Resume <ArrowUpRight size={16} /></a>
-                <a href="#contact" className="focus-ring inline-flex items-center rounded-md border border-slate-700 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-slate-500 hover:bg-slate-800/50">Get in Touch</a>
-                <div className="ml-1 flex items-center"><SocialLink href="https://github.com/leviwof" label="GitHub"><Github size={20} /></SocialLink><SocialLink href="https://www.linkedin.com/in/ganeshmishra-dev/" label="LinkedIn"><Linkedin size={20} /></SocialLink></div>
+              <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-teal-500/30 bg-teal-500/10 px-4 py-1.5 text-xs font-semibold text-accent backdrop-blur-md">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-400 opacity-75" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-teal-500" />
+                </span>
+                <span>Open for Full-Time &amp; High-Impact Roles</span>
+              </div>
+
+              <h1 className="text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-6xl lg:text-7xl">
+                Building High-Scale <br />
+                <span className="bg-gradient-to-r from-teal-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">
+                  Full-Stack &amp; Web Apps.
+                </span>
+              </h1>
+
+              <p className="mt-7 max-w-2xl text-lg leading-relaxed text-slate-300/90 sm:text-xl">
+                Hi, I’m <strong className="font-semibold text-white">Ganesh Mishra</strong>—a Full-Stack Developer with 3+ years of experience engineering high-performance web applications, interactive kiosks, AI integrations, and resilient backend microservices.
+              </p>
+
+              {/* Action CTA Buttons */}
+              <div className="mt-9 flex flex-wrap items-center gap-4">
+                <a
+                  href={`${import.meta.env.BASE_URL}Ganesh_Mishra_Resume.pdf`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="focus-ring group inline-flex items-center gap-2.5 rounded-xl bg-accent px-6 py-3.5 text-sm font-bold text-slate-950 shadow-lg shadow-teal-500/25 transition-all hover:bg-teal-300 hover:shadow-teal-500/40 hover:scale-105"
+                >
+                  View Resume <ArrowUpRight size={18} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
+
+                <a
+                  href="#projects"
+                  className="focus-ring inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-all hover:border-teal-500/50 hover:bg-slate-800"
+                >
+                  Explore Live Projects <ChevronRight size={16} />
+                </a>
+
+                <div className="flex items-center gap-1 pl-2">
+                  <a
+                    href="https://github.com/leviwof"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="focus-ring rounded-xl border border-slate-800 bg-slate-900/80 p-3 text-slate-400 transition-all hover:border-slate-700 hover:text-white"
+                    aria-label="GitHub Profile"
+                  >
+                    <GithubIcon size={20} />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/ganeshmishra-dev/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="focus-ring rounded-xl border border-slate-800 bg-slate-900/80 p-3 text-slate-400 transition-all hover:border-slate-700 hover:text-white"
+                    aria-label="LinkedIn Profile"
+                  >
+                    <LinkedinIcon size={20} />
+                  </a>
+                </div>
+              </div>
+
+              {/* Stat Chips */}
+              <div className="mt-12 grid grid-cols-3 gap-4 border-t border-slate-800/80 pt-8 max-w-xl">
+                <div>
+                  <div className="text-2xl font-extrabold text-white sm:text-3xl">3+</div>
+                  <div className="text-xs text-slate-400 mt-1">Years Experience</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-extrabold text-accent sm:text-3xl">100k+</div>
+                  <div className="text-xs text-slate-400 mt-1">Users Served</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-extrabold text-indigo-400 sm:text-3xl">40%</div>
+                  <div className="text-xs text-slate-400 mt-1">Faster Deployments</div>
+                </div>
               </div>
             </div>
-            <div className="relative mx-auto lg:mx-0">
-              <div className="h-64 w-64 overflow-hidden rounded-full border border-slate-700 bg-slate-800 p-1.5 sm:h-72 sm:w-72 lg:h-80 lg:w-80"><img src={profilePhoto} alt="Ganesh Mishra" className="h-full w-full rounded-full object-cover object-[50%_24%]" /></div>
-              <div className="absolute bottom-5 right-0 rounded-full border border-slate-700 bg-ink px-3 py-1.5 text-xs font-medium text-slate-300 shadow-xl"><span className="mr-2 inline-block h-2 w-2 rounded-full bg-accent" />Open to work</div>
+
+            {/* Profile Avatar Card with Glowing Frame */}
+            <div className="relative mx-auto w-full max-w-md lg:mx-0">
+              <div className="relative rounded-3xl border border-slate-800 bg-slate-900/60 p-4 backdrop-blur-2xl shadow-2xl shadow-indigo-500/10">
+                <div className="relative aspect-square overflow-hidden rounded-2xl border border-slate-700/80 bg-slate-950">
+                  <img
+                    src={profilePhoto}
+                    alt="Ganesh Mishra"
+                    className="h-full w-full object-cover object-[50%_22%]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60" />
+                </div>
+
+                {/* Floating Skill Chips */}
+                <div className="absolute -bottom-3 -left-3 rounded-2xl border border-slate-800 bg-slate-900/90 px-4 py-2.5 text-xs font-semibold text-slate-200 shadow-xl backdrop-blur-xl">
+                  <span className="mr-2 inline-block h-2.5 w-2.5 rounded-full bg-accent animate-pulse" />
+                  Full-Stack Architecture
+                </div>
+
+                <div className="absolute -top-3 -right-3 rounded-2xl border border-slate-800 bg-slate-900/90 px-4 py-2.5 text-xs font-semibold text-slate-200 shadow-xl backdrop-blur-xl flex items-center gap-2">
+                  <Zap size={14} className="text-amber-400" /> React &amp; Node.js Expert
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="about" className="section"><div className="shell grid gap-12 lg:grid-cols-[.65fr_1.35fr] lg:gap-24">
-          <div><p className="eyebrow">01 — About</p><h2 className="section-title">A practical engineer,<br className="hidden lg:block" /> focused on outcomes.</h2></div>
-          <div><p className="text-xl leading-9 text-slate-300">I’m a full-stack software engineer with 3+ years of experience building scalable web applications. My work spans JavaScript, Node.js, React, Docker, and CI/CD—from fintech platforms to AI-enabled workflows. I care about reliable systems, thoughtful collaboration, and improvements users can actually feel.</p>
-            <div className="mt-8 flex flex-wrap gap-3">{['3+ Years Experience', '100,000 Users Served', '40% Faster Deployments'].map((stat) => <span key={stat} className="rounded-full border border-slate-700 bg-slate-800/40 px-4 py-2 text-sm font-medium text-slate-300">{stat}</span>)}</div>
+        {/* ABOUT SECTION */}
+        <section id="about" className="section">
+          <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+            <div>
+              <span className="eyebrow">01 — About Me</span>
+              <h2 className="section-title">
+                A pragmatic developer driven by performance &amp; user experience.
+              </h2>
+            </div>
+            <div className="space-y-6">
+              <p className="text-lg leading-relaxed text-slate-300/90">
+                I specialize in building full-stack applications that combine high-availability backend microservices with sleek, intuitive user interfaces. My software engineering journey spans fintech platforms, automated AI workflows, e-commerce applications, and touchscreen kiosk solutions.
+              </p>
+              <p className="text-base leading-relaxed text-slate-400">
+                Whether creating custom REST/GraphQL APIs with Node.js &amp; NestJS, designing modern UI interfaces in React &amp; Tailwind CSS, or deploying containers to AWS with CI/CD automation, I emphasize clean architecture, robust security, and real business outcomes.
+              </p>
+
+              <div className="grid grid-cols-2 gap-4 pt-4 sm:grid-cols-3">
+                <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
+                  <Monitor className="mb-2 text-accent" size={24} />
+                  <h4 className="font-semibold text-white text-sm">Frontend UI/UX</h4>
+                  <p className="mt-1 text-xs text-slate-400">React, Next.js, Tailwind, Interactive Kiosks</p>
+                </div>
+                <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
+                  <Cpu className="mb-2 text-indigo-400" size={24} />
+                  <h4 className="font-semibold text-white text-sm">Backend &amp; APIs</h4>
+                  <p className="mt-1 text-xs text-slate-400">Node.js, NestJS, REST, GraphQL, Microservices</p>
+                </div>
+                <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
+                  <Cloud className="mb-2 text-purple-400" size={24} />
+                  <h4 className="font-semibold text-white text-sm">DevOps &amp; Cloud</h4>
+                  <p className="mt-1 text-xs text-slate-400">AWS EC2, Docker, CI/CD Actions, PM2</p>
+                </div>
+              </div>
+            </div>
           </div>
-        </div></section>
+        </section>
 
-        <section id="skills" className="section"><div className="shell">
-          <p className="eyebrow">02 — Skills</p><h2 className="section-title">Tools I use to ship.</h2><p className="section-copy">A broad toolkit across product interfaces, APIs, infrastructure, and data.</p>
-          <div className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-2 lg:grid-cols-3">{skillGroups.map((group) => <div key={group.title} className="border-t border-slate-700 pt-5"><h3 className="mb-4 font-semibold text-white">{group.title}</h3><div className="flex flex-wrap gap-2">{group.skills.map((skill) => <span className="tag" key={skill}>{skill}</span>)}</div></div>)}</div>
-        </div></section>
+        {/* PROJECTS SECTION - HIGHLIGHT OF PORTFOLIO */}
+        <section id="projects" className="section">
+          <div className="shell">
+            <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+              <div>
+                <span className="eyebrow">02 — Featured Work</span>
+                <h2 className="section-title">Selected Live Projects.</h2>
+                <p className="section-copy">
+                  Explore production web applications, interactive touchscreen kiosk interfaces, and AI platforms with live links and realistic device mockups.
+                </p>
+              </div>
 
-        <section id="experience" className="section"><div className="shell">
-          <p className="eyebrow">03 — Experience</p><h2 className="section-title">Where I’ve made an impact.</h2>
-          <div className="relative mt-14 ml-2 border-l border-slate-700/80 pl-8 sm:ml-3 sm:pl-12">{experience.map((job, index) => <article key={job.company} className={`${index !== experience.length - 1 ? 'pb-14 sm:pb-16' : ''} relative`}>
-            <span className="absolute -left-[2.34rem] top-1.5 h-3 w-3 rounded-full border-2 border-accent bg-ink sm:-left-[3.34rem]" />
-            <div className="grid gap-4 md:grid-cols-[1fr_auto] md:items-start"><div><h3 className="text-xl font-semibold text-white">{job.company}</h3><p className="mt-1 text-slate-300">{job.role}</p></div><div className="text-sm leading-6 text-slate-500 md:text-right"><p>{job.duration}</p><p>{job.location}</p></div></div>
-            {job.bullets.length > 0 ? <ul className="mt-5 max-w-3xl space-y-3 text-[15px] leading-7 text-slate-400">{job.bullets.map((bullet) => <li key={bullet} className="flex gap-3"><span className="mt-3 h-1 w-1 shrink-0 rounded-full bg-slate-500" />{bullet}</li>)}</ul> : <p className="mt-4 max-w-xl text-sm leading-6 text-slate-500">Role details are intentionally limited to the information available in the current resume.</p>}
-          </article>)}</div>
-        </div></section>
+              {/* Category Tabs Filter */}
+              <div className="flex flex-wrap gap-2 rounded-xl border border-slate-800 bg-slate-950/60 p-1.5 backdrop-blur-md">
+                {['All', 'Web & Kiosk Apps', 'AI & Fintech'].map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    className={`rounded-lg px-4 py-2 text-xs font-semibold transition-all ${
+                      activeTab === tab
+                        ? 'bg-accent text-slate-950 shadow-md shadow-teal-500/20'
+                        : 'text-slate-400 hover:text-white hover:bg-slate-900/80'
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-        <section id="projects" className="section"><div className="shell">
-          <p className="eyebrow">04 — Projects</p><h2 className="section-title">Selected work.</h2><p className="section-copy">Products built to improve decisions, visibility, and customer experience.</p>
-          <div className="mt-12 grid gap-5 lg:grid-cols-3">{projects.map((project, index) => <article key={project.name} className="group flex min-h-72 flex-col rounded-xl border border-slate-700/80 bg-slate-900/30 p-6 transition-all duration-200 hover:-translate-y-1 hover:border-slate-600 hover:bg-slate-900/60">
-            <div className="flex items-start justify-between"><span className="text-sm font-medium text-slate-500">0{index + 1}</span><a href="https://github.com/leviwof" target="_blank" rel="noreferrer" aria-label={`${project.name} GitHub placeholder`} className="focus-ring rounded-md p-1.5 text-slate-500 transition-colors hover:text-white"><Github size={19} /></a></div>
-            <h3 className="mt-8 text-xl font-semibold text-white">{project.name}</h3><p className="mt-3 flex-1 text-sm leading-6 text-slate-400">{project.description}</p><div className="mt-6 flex flex-wrap gap-x-3 gap-y-1.5">{project.tags.map((tag) => <span key={tag} className="text-xs font-medium text-slate-500">{tag}</span>)}</div>
-          </article>)}</div>
-        </div></section>
-
-        <section id="contact" className="section"><div className="shell"><div className="rounded-2xl border border-slate-700/80 bg-slate-900/30 px-6 py-12 sm:px-12 sm:py-16">
-          <p className="eyebrow">05 — Contact</p><div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end"><div><h2 className="max-w-2xl text-3xl font-semibold tracking-tight text-white sm:text-5xl">Let’s build something useful.</h2><p className="mt-5 text-slate-400">Open to full-time roles and freelance projects.</p></div>
-            <div className="flex flex-col items-start gap-3 text-sm sm:flex-row sm:flex-wrap lg:flex-col lg:items-end"><a href="mailto:ganesh.stack21@gmail.com" className="focus-ring inline-flex items-center gap-2 rounded text-slate-300 hover:text-accent"><Mail size={17} />ganesh.stack21@gmail.com</a><a href="https://www.linkedin.com/in/ganeshmishra-dev/" target="_blank" rel="noreferrer" className="focus-ring inline-flex items-center gap-2 rounded text-slate-300 hover:text-accent"><Linkedin size={17} />LinkedIn</a><a href="https://github.com/leviwof" target="_blank" rel="noreferrer" className="focus-ring inline-flex items-center gap-2 rounded text-slate-300 hover:text-accent"><Github size={17} />GitHub</a></div>
+            {/* Featured Projects Grid */}
+            <div className="mt-12 grid gap-8 lg:grid-cols-2">
+              {filteredProjects.map((project) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  onPreviewModal={setSelectedProjectModal}
+                />
+              ))}
+            </div>
           </div>
-        </div></div></section>
+        </section>
+
+        {/* SKILLS SECTION */}
+        <section id="skills" className="section">
+          <div className="shell">
+            <span className="eyebrow">03 — Technical Stack</span>
+            <h2 className="section-title">Tools &amp; Frameworks.</h2>
+            <p className="section-copy">
+              A comprehensive technical stack across web interfaces, backend microservices, databases, cloud DevOps, and security integrations.
+            </p>
+
+            <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {skillGroups.map((group) => {
+                const GroupIcon = group.icon
+                return (
+                  <div
+                    key={group.title}
+                    className="glass-card flex flex-col p-6"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className={`flex h-10 w-10 items-center justify-center rounded-xl border ${group.color}`}>
+                        <GroupIcon size={20} />
+                      </div>
+                      <h3 className="font-bold text-white text-base">{group.title}</h3>
+                    </div>
+
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {group.skills.map((skill) => (
+                        <span key={skill} className="tag">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* EXPERIENCE SECTION */}
+        <section id="experience" className="section">
+          <div className="shell">
+            <span className="eyebrow">04 — Career Journey</span>
+            <h2 className="section-title">Where I’ve Made Impact.</h2>
+
+            <div className="relative mt-14 ml-3 border-l-2 border-slate-800 pl-8 sm:ml-4 sm:pl-12 space-y-12">
+              {experience.map((job, index) => (
+                <article key={job.company} className="relative group">
+                  <span className="absolute -left-[2.55rem] top-1.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-accent bg-ink sm:-left-[3.55rem]">
+                    <span className="h-2 w-2 rounded-full bg-accent" />
+                  </span>
+
+                  <div className="glass-card p-6 sm:p-8">
+                    <div className="flex flex-wrap items-start justify-between gap-4">
+                      <div>
+                        <div className="flex items-center gap-3">
+                          <h3 className="text-xl font-bold text-white">{job.company}</h3>
+                          {job.badge && (
+                            <span className="rounded-full bg-teal-500/10 border border-teal-500/30 px-3 py-0.5 text-xs font-semibold text-accent">
+                              {job.badge}
+                            </span>
+                          )}
+                        </div>
+                        <p className="mt-1 text-base font-medium text-slate-300">{job.role}</p>
+                      </div>
+
+                      <div className="text-xs font-medium text-slate-400 sm:text-right">
+                        <p className="rounded-md border border-slate-800 bg-slate-900/60 px-3 py-1 text-slate-300">
+                          {job.duration}
+                        </p>
+                        <p className="mt-1 text-slate-400">{job.location}</p>
+                      </div>
+                    </div>
+
+                    <ul className="mt-6 space-y-3 text-sm leading-relaxed text-slate-300/90">
+                      {job.bullets.map((bullet, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CONTACT SECTION */}
+        <section id="contact" className="section">
+          <div className="shell">
+            <div className="relative overflow-hidden rounded-3xl border border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950/90 p-8 sm:p-14 backdrop-blur-2xl shadow-2xl shadow-teal-500/5">
+              <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-teal-500/10 blur-3xl" />
+
+              <span className="eyebrow">05 — Get In Touch</span>
+
+              <div className="mt-4 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+                <div>
+                  <h2 className="max-w-2xl text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
+                    Let’s build something extraordinary together.
+                  </h2>
+                  <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-300">
+                    Whether you have an upcoming project, a full-time role, or want to discuss full-stack &amp; AI architectures, feel free to reach out directly.
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-4">
+                  <button
+                    onClick={copyEmail}
+                    className="focus-ring flex items-center justify-between gap-4 rounded-xl border border-slate-800 bg-slate-900/90 px-5 py-3.5 text-sm font-semibold text-white transition-all hover:border-teal-500/50 hover:bg-slate-800"
+                  >
+                    <span className="flex items-center gap-2">
+                      <Mail size={18} className="text-accent" />
+                      ganesh.stack21@gmail.com
+                    </span>
+                    {copied ? (
+                      <span className="flex items-center gap-1 text-xs font-bold text-accent">
+                        <Check size={14} /> Copied!
+                      </span>
+                    ) : (
+                      <Copy size={16} className="text-slate-400" />
+                    )}
+                  </button>
+
+                  <div className="flex items-center gap-3">
+                    <a
+                      href="https://www.linkedin.com/in/ganeshmishra-dev/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="focus-ring flex flex-1 items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3.5 text-sm font-bold text-slate-950 shadow-md shadow-teal-500/20 transition-all hover:bg-teal-300 hover:scale-105"
+                    >
+                      <LinkedinIcon size={18} /> Connect on LinkedIn
+                    </a>
+                    <a
+                      href="https://github.com/leviwof"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="focus-ring flex items-center justify-center rounded-xl border border-slate-800 bg-slate-900/90 p-3.5 text-slate-300 transition-all hover:border-slate-700 hover:text-white"
+                      aria-label="GitHub Profile"
+                    >
+                      <GithubIcon size={20} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
-      <footer className="border-t border-slate-800 py-8"><div className="shell flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between"><p>Built by Ganesh Mishra · {new Date().getFullYear()}</p><div className="flex gap-1"><SocialLink href="https://github.com/leviwof" label="GitHub"><Github size={18} /></SocialLink><SocialLink href="https://www.linkedin.com/in/ganeshmishra-dev/" label="LinkedIn"><Linkedin size={18} /></SocialLink></div></div></footer>
+
+      {/* FOOTER */}
+      <footer className="border-t border-slate-800/80 py-8 bg-slate-950/80 backdrop-blur-md">
+        <div className="shell flex flex-col items-center justify-between gap-4 text-sm text-slate-400 sm:flex-row">
+          <p>© {new Date().getFullYear()} Ganesh Mishra. Designed &amp; Engineered with React &amp; Tailwind CSS.</p>
+          <div className="flex items-center gap-4">
+            <a href="https://github.com/leviwof" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
+              GitHub
+            </a>
+            <span className="text-slate-700">•</span>
+            <a href="https://www.linkedin.com/in/ganeshmishra-dev/" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
+              LinkedIn
+            </a>
+            <span className="text-slate-700">•</span>
+            <a href="mailto:ganesh.stack21@gmail.com" className="hover:text-accent transition-colors">
+              Email
+            </a>
+          </div>
+        </div>
+      </footer>
+
+      {/* DETAILS MODAL */}
+      {selectedProjectModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md">
+          <div className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-slate-800 bg-slate-900 p-6 shadow-2xl">
+            <button
+              onClick={() => setSelectedProjectModal(null)}
+              className="absolute right-4 top-4 rounded-lg bg-slate-800 p-2 text-slate-400 hover:text-white"
+            >
+              <X size={20} />
+            </button>
+            <h3 className="text-2xl font-bold text-white">{selectedProjectModal.name}</h3>
+            <p className="mt-1 text-sm text-accent">{selectedProjectModal.subtitle}</p>
+            <p className="mt-4 text-sm leading-relaxed text-slate-300">{selectedProjectModal.description}</p>
+            
+            {selectedProjectModal.highlights && (
+              <div className="mt-6 border-t border-slate-800 pt-4">
+                <h4 className="text-xs font-semibold uppercase text-slate-400">Key Highlights</h4>
+                <ul className="mt-2 space-y-2 text-xs text-slate-300">
+                  {selectedProjectModal.highlights.map((h, i) => (
+                    <li key={i} className="flex items-center gap-2">
+                      <Check size={14} className="text-accent" /> {h}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={() => setSelectedProjectModal(null)}
+                className="rounded-lg bg-slate-800 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
