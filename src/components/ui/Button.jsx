@@ -7,7 +7,7 @@ const base =
 
 const variants = {
   // Solid accent — reserve for the single primary action in a view.
-  primary: 'bg-accent text-ink-dark shadow-sm hover:bg-accent-strong active:scale-[0.98]',
+  primary: 'bg-accent text-white shadow-sm hover:bg-accent-strong active:scale-[0.98]',
   // Bordered surface — the default for secondary actions.
   secondary: 'border border-ink-border bg-ink-card/40 text-white hover:border-slate-600 hover:bg-ink-card',
   // Quiet, borderless.

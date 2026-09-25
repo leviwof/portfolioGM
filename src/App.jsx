@@ -7,6 +7,7 @@ import { Button, Card, SectionHeading, Reveal } from './components/ui'
 import { WorkRow } from './components/work'
 import { metrics, services } from './data/services'
 import { selectedWork } from './data/work'
+
 import { skillGroups } from './data/skills'
 import { experience } from './data/experience'
 
@@ -24,7 +25,7 @@ function App() {
       {/* Skip link — first focusable element for keyboard/AT users. */}
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-ink-dark"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
       >
         Skip to content
       </a>
@@ -349,7 +350,7 @@ function App() {
                       href="https://www.linkedin.com/in/ganeshmishra-dev/"
                       target="_blank"
                       rel="noreferrer"
-                      className="focus-ring flex flex-1 items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3.5 text-sm font-bold text-slate-950 shadow-md shadow-teal-500/20 transition-all hover:bg-teal-300 hover:scale-105"
+                      className="focus-ring flex flex-1 items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3.5 text-sm font-bold text-white shadow-md shadow-accent/25 transition-all hover:bg-accent-strong hover:scale-105"
                     >
                       <LinkedinIcon size={18} /> Connect on LinkedIn
                     </a>

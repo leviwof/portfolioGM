@@ -1,12 +1,13 @@
 import { cn } from '../../lib/cn'
 
-// One restrained brand hue per project, resolved to a hex for inline SVG.
+// One restrained red hue per project (tri-color system), resolved to a hex for
+// inline SVG. Kept subtly distinct across the red family.
 const HUE = {
-  emerald: '#10B981',
-  cyan: '#06B6D4',
-  indigo: '#6366F1',
-  purple: '#A855F7',
-  amber: '#F59E0B',
+  emerald: '#EF4444',
+  cyan: '#F87171',
+  indigo: '#EF4444',
+  purple: '#DC2626',
+  amber: '#F87171',
 }
 
 // Each glyph is line-art in the project's hue — a designed motif, never a
@@ -31,7 +32,7 @@ function Interview({ c }) {
   return (
     <g fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
       <rect x="108" y="62" width="140" height="124" rx="12" stroke={c} strokeOpacity="0.5" fill={c} fillOpacity="0.04" />
-      <path d="M126 92 H214 M126 110 H214 M126 128 H198 M126 146 H182" stroke="#CBD5E1" strokeOpacity="0.4" strokeWidth="6" />
+      <path d="M126 92 H214 M126 110 H214 M126 128 H198 M126 146 H182" stroke="#D4D4D4" strokeOpacity="0.4" strokeWidth="6" />
       <rect x="228" y="70" width="60" height="40" rx="11" fill={c} fillOpacity="0.07" strokeOpacity="0.7" />
       <path d="M238 128 l7 7 l14 -16" strokeWidth="3.2" />
       <circle cx="249" cy="132" r="22" strokeOpacity="0.85" />
@@ -68,7 +69,7 @@ function Ai({ c }) {
       <circle cx="180" cy="112" r="5" fill={c} fillOpacity="0.75" stroke="none" />
       <path d="M258 74 L263 90 L279 95 L263 100 L258 116 L253 100 L237 95 L253 90 Z" fill={c} fillOpacity="0.9" stroke="none" />
       <rect x="214" y="132" width="80" height="46" rx="14" strokeOpacity="0.4" fill={c} fillOpacity="0.04" />
-      <path d="M230 155 H278" stroke="#CBD5E1" strokeOpacity="0.4" strokeWidth="6" />
+      <path d="M230 155 H278" stroke="#D4D4D4" strokeOpacity="0.4" strokeWidth="6" />
     </g>
   )
 }
@@ -116,10 +117,10 @@ export function ProjectCover({ theme = 'business', accent = 'emerald', className
           <stop offset="100%" stopColor={c} stopOpacity="0" />
         </radialGradient>
         <pattern id={`${gid}-dots`} width="18" height="18" patternUnits="userSpaceOnUse">
-          <circle cx="1.5" cy="1.5" r="1.1" fill="#94A3B8" fillOpacity="0.1" />
+          <circle cx="1.5" cy="1.5" r="1.1" fill="#A3A3A3" fillOpacity="0.1" />
         </pattern>
       </defs>
-      <rect width="400" height="250" fill="#0A0E16" />
+      <rect width="400" height="250" fill="#0A0A0A" />
       <rect width="400" height="250" fill={`url(#${gid}-dots)`} />
       <rect width="400" height="250" fill={`url(#${gid}-glow)`} />
       <Glyph c={c} />

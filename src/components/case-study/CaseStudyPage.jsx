@@ -8,11 +8,11 @@ import CaseFooterNav from './CaseFooterNav'
 // the --case-accent CSS variable so section renderers can accent themselves
 // without relying on runtime-generated Tailwind classes.
 const HUE = {
-  emerald: '#10B981',
-  cyan: '#06B6D4',
-  indigo: '#6366F1',
-  purple: '#A855F7',
-  amber: '#F59E0B',
+  emerald: '#EF4444',
+  cyan: '#F87171',
+  indigo: '#EF4444',
+  purple: '#DC2626',
+  amber: '#F87171',
 }
 
 /**

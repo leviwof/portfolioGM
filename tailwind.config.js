@@ -4,31 +4,54 @@ export default {
   theme: {
     extend: {
       colors: {
-        // --- Surfaces (neutral, restrained) ---
+        // === Red / white / black system ===
+        // --- Surfaces: near-black neutral ramp ---
         ink: {
-          DEFAULT: '#0B0F17', // page background
-          dark: '#070A10', // deepest — footer, on-accent text
-          light: '#131B2E', // subtle raised fill
-          card: '#161F33', // card surface
-          cardHover: '#1E2B45',
-          border: '#24324D', // hairline borders
+          DEFAULT: '#0A0A0A', // page background
+          dark: '#050505', // deepest — footer, deep fills
+          light: '#161616', // subtle raised fill
+          card: '#141414', // card surface
+          cardHover: '#1F1F1F',
+          border: '#2A2A2A', // hairline borders
         },
-        // --- Single restrained accent (links, focus, primary CTA only) ---
+        // --- Single accent: red (links, focus, primary CTA, highlights) ---
         accent: {
-          DEFAULT: '#2DD4BF',
-          soft: 'rgba(45, 212, 191, 0.12)',
-          strong: '#14B8A6',
-          glow: 'rgba(45, 212, 191, 0.25)',
-          dark: '#14B8A6',
+          DEFAULT: '#EF4444',
+          soft: 'rgba(239, 68, 68, 0.12)',
+          strong: '#DC2626',
+          glow: 'rgba(239, 68, 68, 0.28)',
+          dark: '#DC2626',
         },
-        // --- Supporting hues (used sparingly for category accents) ---
+        // --- Category hues collapse into the red family (kept subtly distinct) ---
         brand: {
-          cyan: '#06B6D4',
-          indigo: '#6366F1',
-          emerald: '#10B981',
-          purple: '#A855F7',
-          amber: '#F59E0B',
+          cyan: '#F87171',
+          indigo: '#EF4444',
+          emerald: '#EF4444',
+          purple: '#DC2626',
+          amber: '#F87171',
         },
+        // --- Neutral gray ramp: override `slate` so every existing
+        //     text/border reads as a true gray (no blue tint) on black ---
+        slate: {
+          100: '#F5F5F5',
+          200: '#E5E5E5',
+          300: '#D4D4D4',
+          400: '#A3A3A3',
+          500: '#737373',
+          600: '#525252',
+          700: '#404040',
+          800: '#262626',
+          900: '#171717',
+          950: '#0A0A0A',
+        },
+        // --- Legacy hue classes remap into the red family so older
+        //     sections match the tri-color system without rewrites ---
+        teal: { 300: '#FCA5A5', 400: '#F87171', 500: '#EF4444', 600: '#DC2626' },
+        cyan: { 300: '#FCA5A5', 400: '#F87171', 500: '#EF4444', 600: '#DC2626' },
+        indigo: { 300: '#FCA5A5', 400: '#F87171', 500: '#EF4444', 600: '#DC2626' },
+        purple: { 300: '#FCA5A5', 400: '#F87171', 500: '#EF4444', 600: '#DC2626' },
+        emerald: { 300: '#FCA5A5', 400: '#F87171', 500: '#EF4444', 600: '#DC2626' },
+        amber: { 300: '#FCA5A5', 400: '#F87171', 500: '#EF4444', 600: '#DC2626' },
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
