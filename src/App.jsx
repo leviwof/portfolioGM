@@ -1,142 +1,23 @@
 import { useState } from 'react'
-import {
-  ArrowUpRight, Mail, X, Sparkles, Monitor, Cpu,
-  Check, Copy, Eye, Lock, Cloud,
-} from 'lucide-react'
+import { ArrowUpRight, Mail, Check, Copy, Monitor, Cpu, Cloud } from 'lucide-react'
 
 import { GithubIcon, LinkedinIcon } from './components/icons'
 import { Navbar, Container, Section } from './components/layout'
-import { Button, Card, SectionHeading } from './components/ui'
+import { Button, Card, SectionHeading, Reveal } from './components/ui'
+import { WorkCard } from './components/work'
 import { metrics, services } from './data/services'
+import { featuredWork, productWork } from './data/work'
 import { skillGroups } from './data/skills'
 import { experience } from './data/experience'
-import { projects } from './data/projects'
-
-function ProjectCard({ project, onPreviewModal }) {
-  return (
-    <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-slate-700 hover:bg-slate-900/90 hover:shadow-2xl hover:shadow-teal-500/10">
-      {/* Realistic Browser Window Top Bar Frame */}
-      <div className="flex items-center justify-between border-b border-slate-800/90 bg-slate-950/90 px-4 py-3">
-        <div className="flex items-center gap-2">
-          <span className="h-3 w-3 rounded-full bg-[#FF5F56] shadow-sm shadow-red-500/50" />
-          <span className="h-3 w-3 rounded-full bg-[#FFBD2E] shadow-sm shadow-amber-500/50" />
-          <span className="h-3 w-3 rounded-full bg-[#27C93F] shadow-sm shadow-emerald-500/50" />
-        </div>
-        <div className="flex max-w-[240px] sm:max-w-[320px] flex-1 items-center justify-center gap-1.5 rounded-md border border-slate-800 bg-slate-900/90 px-3 py-1 text-xs text-slate-400">
-          <Lock size={12} className="text-emerald-400 shrink-0" />
-          <span className="truncate font-mono text-[11px] text-slate-300">{project.displayUrl}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          {project.liveUrl && (
-            <span className="inline-flex h-2 w-2 animate-ping rounded-full bg-emerald-400" />
-          )}
-        </div>
-      </div>
-
-      {/* Project Image Frame Showcase */}
-      <div className="relative aspect-[16/9] w-full overflow-hidden bg-slate-950">
-        <img
-          src={project.image}
-          alt={project.name}
-          className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 transition-opacity group-hover:opacity-60" />
-
-        {/* Floating Category Badge */}
-        <div className="absolute left-4 top-4 flex items-center gap-2">
-          <span className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold backdrop-blur-md ${project.badgeColor}`}>
-            <Sparkles size={12} />
-            {project.badge}
-          </span>
-        </div>
-
-        {/* Action Overlay Button */}
-        <div className="absolute bottom-4 right-4 flex items-center gap-2">
-          {project.liveUrl ? (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="focus-ring inline-flex items-center gap-1.5 rounded-xl bg-accent px-4 py-2 text-xs font-bold text-slate-950 shadow-lg shadow-teal-500/20 transition-all hover:bg-teal-300 hover:scale-105"
-            >
-              Live Demo <ArrowUpRight size={14} />
-            </a>
-          ) : (
-            <button
-              onClick={() => onPreviewModal(project)}
-              className="focus-ring inline-flex items-center gap-1.5 rounded-xl border border-slate-700 bg-slate-900/90 px-3.5 py-2 text-xs font-semibold text-slate-200 backdrop-blur-md hover:border-slate-500 hover:bg-slate-800"
-            >
-              <Eye size={14} /> Details
-            </button>
-          )}
-        </div>
-      </div>
-
-      {/* Content Area */}
-      <div className="flex flex-1 flex-col p-6 sm:p-7">
-        <div className="flex items-start justify-between gap-2">
-          <div>
-            <h3 className="text-xl font-bold text-white transition-colors group-hover:text-accent">
-              {project.name}
-            </h3>
-            <p className="mt-1 text-xs font-medium text-slate-400">{project.subtitle}</p>
-          </div>
-          {project.githubUrl && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="focus-ring rounded-lg border border-slate-800 bg-slate-900/60 p-2 text-slate-400 transition-colors hover:border-slate-700 hover:text-white shrink-0"
-              aria-label="View on GitHub"
-            >
-              <GithubIcon size={18} />
-            </a>
-          )}
-        </div>
-
-        <p className="mt-4 flex-1 text-sm leading-relaxed text-slate-300/90">
-          {project.description}
-        </p>
-
-        {/* Key Highlights */}
-        {project.highlights && (
-          <ul className="mt-4 space-y-1.5 border-t border-slate-800/80 pt-4 text-xs text-slate-400">
-            {project.highlights.map((item, idx) => (
-              <li key={idx} className="flex items-center gap-2">
-                <Check size={14} className="text-accent shrink-0" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {/* Tech Stack Tags */}
-        <div className="mt-6 flex flex-wrap gap-1.5 border-t border-slate-800/80 pt-4">
-          {project.tags.map((tag) => (
-            <span key={tag} className="tag">
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-    </article>
-  )
-}
 
 function App() {
-  const [activeTab, setActiveTab] = useState('All')
   const [copied, setCopied] = useState(false)
-  const [selectedProjectModal, setSelectedProjectModal] = useState(null)
 
   const copyEmail = () => {
     navigator.clipboard.writeText('ganesh.stack21@gmail.com')
     setCopied(true)
     setTimeout(() => setCopied(false), 2500)
   }
-
-  const filteredProjects = activeTab === 'All'
-    ? projects
-    : projects.filter(p => p.category === activeTab)
 
   return (
     <div id="top" className="min-h-screen bg-ink text-slate-100 selection:bg-accent/30 selection:text-white">
@@ -324,48 +205,41 @@ function App() {
           </div>
         </section>
 
-        {/* PROJECTS SECTION - HIGHLIGHT OF PORTFOLIO */}
-        <section id="projects" className="section">
-          <div className="shell">
-            <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-              <div>
-                <span className="eyebrow">02 — Featured Work</span>
-                <h2 className="section-title">Selected Live Projects.</h2>
-                <p className="section-copy">
-                  Explore production web applications, interactive touchscreen kiosk interfaces, and AI platforms with live links and realistic device mockups.
-                </p>
-              </div>
+        {/* SELECTED WORK */}
+        <Section id="work">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Portfolio"
+              title="Selected Work"
+              description="A selection of products and systems I've designed, built, and worked on across product engineering, AI, fintech, food delivery, and modern web experiences."
+            />
+          </Reveal>
 
-              {/* Category Tabs Filter */}
-              <div className="flex flex-wrap gap-2 rounded-xl border border-slate-800 bg-slate-950/60 p-1.5 backdrop-blur-md">
-                {['All', 'Web & Kiosk Apps', 'AI & Fintech'].map((tab) => (
-                  <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`rounded-lg px-4 py-2 text-xs font-semibold transition-all ${
-                      activeTab === tab
-                        ? 'bg-accent text-slate-950 shadow-md shadow-teal-500/20'
-                        : 'text-slate-400 hover:text-white hover:bg-slate-900/80'
-                    }`}
-                  >
-                    {tab}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Featured Projects Grid */}
-            <div className="mt-12 grid gap-8 lg:grid-cols-2">
-              {filteredProjects.map((project) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  onPreviewModal={setSelectedProjectModal}
-                />
-              ))}
-            </div>
+          {/* Featured — strongest visual treatment */}
+          <p className="mt-14 font-mono text-xs uppercase tracking-[0.2em] text-accent">Featured Work</p>
+          <div className="mt-6 grid gap-6 lg:grid-cols-2">
+            {featuredWork.slice(0, 2).map((project, i) => (
+              <Reveal key={project.id} delay={i * 80} className="h-full">
+                <WorkCard project={project} variant="feature" />
+              </Reveal>
+            ))}
           </div>
-        </section>
+          <Reveal className="mt-6">
+            <WorkCard project={featuredWork[2]} variant="wide" />
+          </Reveal>
+
+          {/* Product & interface craft */}
+          <p className="mt-16 font-mono text-xs uppercase tracking-[0.2em] text-accent">
+            Product &amp; Interface Work
+          </p>
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {productWork.map((project, i) => (
+              <Reveal key={project.id} delay={i * 80} className="h-full">
+                <WorkCard project={project} variant="compact" />
+              </Reveal>
+            ))}
+          </div>
+        </Section>
 
         {/* SKILLS SECTION */}
         <section id="skills" className="section">
@@ -540,45 +414,6 @@ function App() {
           </div>
         </div>
       </footer>
-
-      {/* DETAILS MODAL */}
-      {selectedProjectModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md">
-          <div className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-slate-800 bg-slate-900 p-6 shadow-2xl">
-            <button
-              onClick={() => setSelectedProjectModal(null)}
-              className="absolute right-4 top-4 rounded-lg bg-slate-800 p-2 text-slate-400 hover:text-white"
-            >
-              <X size={20} />
-            </button>
-            <h3 className="text-2xl font-bold text-white">{selectedProjectModal.name}</h3>
-            <p className="mt-1 text-sm text-accent">{selectedProjectModal.subtitle}</p>
-            <p className="mt-4 text-sm leading-relaxed text-slate-300">{selectedProjectModal.description}</p>
-            
-            {selectedProjectModal.highlights && (
-              <div className="mt-6 border-t border-slate-800 pt-4">
-                <h4 className="text-xs font-semibold uppercase text-slate-400">Key Highlights</h4>
-                <ul className="mt-2 space-y-2 text-xs text-slate-300">
-                  {selectedProjectModal.highlights.map((h, i) => (
-                    <li key={i} className="flex items-center gap-2">
-                      <Check size={14} className="text-accent" /> {h}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            <div className="mt-6 flex justify-end">
-              <button
-                onClick={() => setSelectedProjectModal(null)}
-                className="rounded-lg bg-slate-800 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
