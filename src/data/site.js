@@ -7,7 +7,7 @@ export const site = {
   role: 'Full-Stack Engineer',
   // Client-facing positioning for international founders, CTOs, and agencies.
   positioning: 'Full-Stack Engineer who takes web products from idea to production.',
-  email: 'ganesh.stack21@gmail.com',
+  email: 'ganeshkemoap123@gmail.com',
   location: 'Mumbai, India',
   resumeFile: 'Ganesh_Mishra_Resume.pdf',
   links: {

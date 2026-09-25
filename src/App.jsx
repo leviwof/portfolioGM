@@ -1,12 +1,11 @@
-import { useState } from 'react'
-import { ArrowUpRight, Mail, Check, Copy } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 
-import { GithubIcon, LinkedinIcon } from './components/icons'
-import { Navbar, Container, Section } from './components/layout'
+import { Navbar, Container, Section, SiteFooter } from './components/layout'
 import { Button, Card, Tag, SectionHeading, Reveal } from './components/ui'
 import { WorkRow } from './components/work'
 import { MoreWorkGrid } from './components/more-work'
 import { ExperienceTimeline } from './components/experience'
+import { ContactSection } from './components/contact'
 import { cn } from './lib/cn'
 import { metrics, services } from './data/services'
 import { selectedWork } from './data/work'
@@ -15,14 +14,6 @@ import { experience } from './data/experience'
 import { aboutParagraphs, capabilities, education } from './data/about'
 
 function App() {
-  const [copied, setCopied] = useState(false)
-
-  const copyEmail = () => {
-    navigator.clipboard.writeText('ganesh.stack21@gmail.com')
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2500)
-  }
-
   return (
     <div id="top" className="min-h-screen bg-ink text-slate-100 selection:bg-accent/30 selection:text-white">
       {/* Skip link — first focusable element for keyboard/AT users. */}
@@ -300,121 +291,12 @@ function App() {
           </div>
         </Section>
 
-        {/* TRANSITION CTA */}
-        <Section>
-          <Reveal>
-            <div className="relative overflow-hidden rounded-card-lg border border-ink-border/70 bg-ink-card/40 px-6 py-14 text-center shadow-card sm:px-12 sm:py-16">
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-accent/10 blur-[100px]"
-              />
-              <div className="relative mx-auto max-w-2xl">
-                <h2 className="text-display-lg text-white">
-                  Need an engineer who can own the implementation?
-                </h2>
-                <p className="mt-4 text-base leading-relaxed text-slate-400 sm:text-lg">
-                  Whether you&apos;re building an MVP, extending an existing product, or need
-                  ongoing engineering support, let&apos;s discuss what you&apos;re building.
-                </p>
-                <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-                  <Button href="#contact" size="lg" className="w-full sm:w-auto">
-                    Let&apos;s Work Together
-                    <ArrowUpRight size={18} />
-                  </Button>
-                  <Button href="#work" variant="secondary" size="lg" className="w-full sm:w-auto">
-                    View Selected Work
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </Section>
-
-        {/* CONTACT SECTION */}
-        <section id="contact" className="section">
-          <div className="shell">
-            <div className="relative overflow-hidden rounded-3xl border border-slate-800 bg-gradient-to-b from-slate-900/80 to-slate-950/90 p-8 sm:p-14 backdrop-blur-2xl shadow-2xl shadow-teal-500/5">
-              <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-teal-500/10 blur-3xl" />
-
-              <span className="eyebrow">05 — Get In Touch</span>
-
-              <div className="mt-4 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-                <div>
-                  <h2 className="max-w-2xl text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
-                    Let’s build something extraordinary together.
-                  </h2>
-                  <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-300">
-                    Whether you have an upcoming project, a full-time role, or want to discuss full-stack &amp; AI architectures, feel free to reach out directly.
-                  </p>
-                </div>
-
-                <div className="flex flex-col gap-4">
-                  <button
-                    onClick={copyEmail}
-                    className="focus-ring flex items-center justify-between gap-4 rounded-xl border border-slate-800 bg-slate-900/90 px-5 py-3.5 text-sm font-semibold text-white transition-all hover:border-teal-500/50 hover:bg-slate-800"
-                  >
-                    <span className="flex items-center gap-2">
-                      <Mail size={18} className="text-accent" />
-                      ganesh.stack21@gmail.com
-                    </span>
-                    {copied ? (
-                      <span className="flex items-center gap-1 text-xs font-bold text-accent">
-                        <Check size={14} /> Copied!
-                      </span>
-                    ) : (
-                      <Copy size={16} className="text-slate-400" />
-                    )}
-                  </button>
-
-                  <div className="flex items-center gap-3">
-                    <a
-                      href="https://www.linkedin.com/in/ganeshmishra-dev/"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="focus-ring flex flex-1 items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3.5 text-sm font-bold text-white shadow-md shadow-accent/25 transition-all hover:bg-accent-strong hover:scale-105"
-                    >
-                      <LinkedinIcon size={18} /> Connect on LinkedIn
-                    </a>
-                    <a
-                      href="https://github.com/leviwof"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="focus-ring flex items-center justify-center rounded-xl border border-slate-800 bg-slate-900/90 p-3.5 text-slate-300 transition-all hover:border-slate-700 hover:text-white"
-                      aria-label="GitHub Profile"
-                    >
-                      <GithubIcon size={20} />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* CONTACT & CLIENT CONVERSION */}
+        <ContactSection />
       </main>
 
       {/* FOOTER */}
-      <footer className="border-t border-slate-800/80 py-8 bg-slate-950/80 backdrop-blur-md">
-        <div className="shell flex flex-col items-center justify-between gap-4 text-sm text-slate-400 sm:flex-row">
-          <p>© {new Date().getFullYear()} Ganesh Mishra. Designed &amp; Engineered with React &amp; Tailwind CSS.</p>
-          <div className="flex items-center gap-4">
-            <a href="https://portfolio-ganesh-mishra.vercel.app/" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
-              Portfolio
-            </a>
-            <span className="text-slate-700">•</span>
-            <a href="https://github.com/leviwof" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
-              GitHub
-            </a>
-            <span className="text-slate-700">•</span>
-            <a href="https://www.linkedin.com/in/ganeshmishra-dev/" target="_blank" rel="noreferrer" className="hover:text-accent transition-colors">
-              LinkedIn
-            </a>
-            <span className="text-slate-700">•</span>
-            <a href="mailto:ganesh.stack21@gmail.com" className="hover:text-accent transition-colors">
-              Email
-            </a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   )
 }
