@@ -1,109 +1,15 @@
 import { useEffect, useState } from 'react'
 import {
-  ArrowUpRight, Mail, Menu, X, Sparkles, Monitor, Cpu,
+  ArrowUpRight, Mail, X, Sparkles, Monitor, Cpu,
   Check, Copy, Eye, Zap, ChevronRight, Lock, Globe, Cloud,
 } from 'lucide-react'
 
 import profilePhoto from './assets-profile.jpg'
 import { GithubIcon, LinkedinIcon } from './components/icons'
-import { navItems } from './data/site'
+import { Navbar } from './components/layout'
 import { skillGroups } from './data/skills'
 import { experience } from './data/experience'
 import { projects } from './data/projects'
-
-function Header() {
-  const [open, setOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  useEffect(() => {
-    const close = () => setOpen(false)
-    window.addEventListener('resize', close)
-    return () => window.removeEventListener('resize', close)
-  }, [])
-
-  return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled || open
-          ? 'border-b border-slate-800/80 bg-ink/90 backdrop-blur-xl shadow-lg shadow-black/40'
-          : 'bg-transparent'
-      }`}
-    >
-      <nav className="shell flex h-20 items-center justify-between" aria-label="Primary navigation">
-        <a href="#top" className="focus-ring group flex items-center gap-3 rounded-lg text-xl font-bold tracking-tight text-white">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-teal-500 to-indigo-600 font-extrabold text-slate-950 shadow-md shadow-teal-500/20 transition-transform group-hover:scale-105">
-            GM
-          </span>
-          <div className="flex flex-col">
-            <span className="text-base font-extrabold leading-tight tracking-tight text-white">
-              Ganesh Mishra<span className="text-accent">.</span>
-            </span>
-            <span className="text-[11px] font-medium text-slate-400">Full-Stack Engineer</span>
-          </div>
-        </a>
-
-        <div className="hidden items-center gap-8 md:flex">
-          {navItems.map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className="focus-ring rounded-md text-sm font-medium text-slate-300 transition-colors hover:text-accent"
-            >
-              {item}
-            </a>
-          ))}
-          <a
-            href="mailto:ganesh.stack21@gmail.com"
-            className="focus-ring inline-flex items-center gap-2 rounded-full border border-teal-500/30 bg-teal-500/10 px-4 py-2 text-xs font-semibold text-accent transition-all hover:bg-teal-500/20 hover:border-teal-500/50"
-          >
-            <Mail size={14} /> Hire Me
-          </a>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => setOpen(!open)}
-          className="focus-ring rounded-lg border border-slate-800 bg-slate-900/60 p-2.5 text-slate-300 md:hidden"
-          aria-expanded={open}
-          aria-label="Toggle menu"
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </nav>
-
-      {open && (
-        <div className="shell border-t border-slate-800/80 bg-slate-950/95 py-4 backdrop-blur-2xl md:hidden">
-          <div className="flex flex-col space-y-2">
-            {navItems.map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                onClick={() => setOpen(false)}
-                className="block rounded-lg px-4 py-3 text-base font-medium text-slate-200 hover:bg-slate-800/80 hover:text-accent"
-              >
-                {item}
-              </a>
-            ))}
-            <a
-              href="mailto:ganesh.stack21@gmail.com"
-              onClick={() => setOpen(false)}
-              className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-accent py-3 text-sm font-semibold text-slate-950"
-            >
-              <Mail size={16} /> Contact Ganesh
-            </a>
-          </div>
-        </div>
-      )}
-    </header>
-  )
-}
 
 function ProjectCard({ project, onPreviewModal }) {
   return (
@@ -233,6 +139,14 @@ function App() {
 
   return (
     <div id="top" className="min-h-screen bg-ink text-slate-100 selection:bg-accent/30 selection:text-white">
+      {/* Skip link — first focusable element for keyboard/AT users. */}
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-ink-dark"
+      >
+        Skip to content
+      </a>
+
       {/* Background Ambient Glow Effects */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
         <div className="absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full bg-teal-500/10 blur-[130px]" />
@@ -240,9 +154,9 @@ function App() {
         <div className="absolute bottom-10 left-1/3 h-[500px] w-[500px] rounded-full bg-purple-600/10 blur-[140px]" />
       </div>
 
-      <Header />
+      <Navbar />
 
-      <main className="relative z-10">
+      <main id="main" className="relative z-10">
         {/* HERO SECTION */}
         <section className="shell flex min-h-[92vh] items-center pb-16 pt-32 sm:pb-24 sm:pt-40">
           <div className="grid w-full items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">

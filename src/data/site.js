@@ -17,6 +17,20 @@ export const site = {
   },
 }
 
-export const navItems = ['About', 'Skills', 'Projects', 'Experience', 'Contact']
+/**
+ * Global navigation model.
+ * Links point at the section anchors the page will expose; keep the set small
+ * and client-oriented (what I do / proof / who I am), and the CTA singular.
+ */
+export const nav = {
+  logo: 'GANESH MISHRA',
+  links: [
+    { label: 'Work', href: '#work' },
+    { label: 'Services', href: '#services' },
+    { label: 'Experience', href: '#experience' },
+    { label: 'About', href: '#about' },
+  ],
+  cta: { label: "Let's Work Together", href: '#contact' },
+}
 
 export default site

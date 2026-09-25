@@ -27,7 +27,7 @@ npm run build
 src/
   components/
     icons/     Brand icons (GitHub, LinkedIn) not covered by lucide-react
-    layout/    Container, Section — the width & vertical-rhythm primitives
+    layout/    Container, Section, Navbar — width, vertical-rhythm & the global nav
     ui/        Button, Card, Tag, Badge, Eyebrow, SectionHeading
   data/        Content, decoupled from presentation:
                site.js, skills.js, experience.js, projects.js
@@ -39,7 +39,7 @@ src/
 Import primitives via the barrels:
 
 ```jsx
-import { Container, Section } from './components/layout'
+import { Container, Section, Navbar } from './components/layout'
 import { Button, Card, SectionHeading } from './components/ui'
 ```
 
