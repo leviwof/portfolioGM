@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import {
   ArrowUpRight, Mail, X, Sparkles, Monitor, Cpu,
-  Check, Copy, Eye, Zap, ChevronRight, Lock, Globe, Cloud,
+  Check, Copy, Eye, Lock, Cloud,
 } from 'lucide-react'
 
-import profilePhoto from './assets-profile.jpg'
 import { GithubIcon, LinkedinIcon } from './components/icons'
-import { Navbar } from './components/layout'
+import { Navbar, Container } from './components/layout'
+import { Button } from './components/ui'
 import { skillGroups } from './data/skills'
 import { experience } from './data/experience'
 import { projects } from './data/projects'
@@ -157,120 +157,86 @@ function App() {
       <Navbar />
 
       <main id="main" className="relative z-10">
-        {/* HERO SECTION */}
-        <section className="shell flex min-h-[92vh] items-center pb-16 pt-32 sm:pb-24 sm:pt-40">
-          <div className="grid w-full items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-            <div className="max-w-3xl">
-              <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-teal-500/30 bg-teal-500/10 px-4 py-1.5 text-xs font-semibold text-accent backdrop-blur-md">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-400 opacity-75" />
-                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-teal-500" />
+        {/* HERO */}
+        <section className="relative overflow-hidden">
+          <Container className="pb-20 pt-32 sm:pb-28 sm:pt-40 lg:pb-32 lg:pt-48">
+            <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+              {/* Message */}
+              <div className="max-w-2xl animate-fade-up">
+                <span className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-ink-border bg-ink-card/50 px-3.5 py-1.5 text-xs font-medium text-slate-300 backdrop-blur-sm">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+                  </span>
+                  Available for freelance &amp; contract work
                 </span>
-                <span>Open for Full-Time &amp; High-Impact Roles</span>
+
+                <h1 className="text-display-2xl text-white">
+                  I build web products that are{' '}
+                  <span className="text-accent">ready for real users.</span>
+                </h1>
+
+                <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
+                  I&apos;m <span className="font-semibold text-white">Ganesh Mishra</span>, a Full-Stack
+                  Engineer with 3+ years of experience building production systems across fintech,
+                  food delivery, SaaS, and business applications.
+                </p>
+
+                <p className="mt-4 max-w-xl leading-relaxed text-slate-400">
+                  From APIs and databases to polished React interfaces and cloud deployment, I can
+                  take a product from idea to production.
+                </p>
+
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                  <Button href="#work" size="lg" className="w-full sm:w-auto">
+                    View Selected Work
+                    <ArrowUpRight size={18} />
+                  </Button>
+                  <Button href="#contact" variant="secondary" size="lg" className="w-full sm:w-auto">
+                    Let&apos;s Work Together
+                  </Button>
+                </div>
+
+                <p className="mt-8 font-mono text-xs uppercase tracking-[0.15em] text-slate-500">
+                  React / Next.js · Node.js / NestJS · PostgreSQL · AWS / Azure
+                </p>
               </div>
 
-              <h1 className="text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-6xl lg:text-7xl">
-                Building High-Scale <br />
-                <span className="bg-gradient-to-r from-teal-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">
-                  Full-Stack &amp; Web Apps.
-                </span>
-              </h1>
-
-              <p className="mt-7 max-w-2xl text-lg leading-relaxed text-slate-300/90 sm:text-xl">
-                Hi, I’m <strong className="font-semibold text-white">Ganesh Mishra</strong>—a Full-Stack Developer with 3+ years of experience engineering high-performance web applications, interactive kiosks, AI integrations, and resilient backend microservices.
-              </p>
-
-              {/* Action CTA Buttons */}
-              <div className="mt-9 flex flex-wrap items-center gap-4">
-                <a
-                  href={`${import.meta.env.BASE_URL}Ganesh_Mishra_Resume.pdf`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="focus-ring group inline-flex items-center gap-2.5 rounded-xl bg-accent px-6 py-3.5 text-sm font-bold text-slate-950 shadow-lg shadow-teal-500/25 transition-all hover:bg-teal-300 hover:shadow-teal-500/40 hover:scale-105"
-                >
-                  View Resume <ArrowUpRight size={18} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </a>
-
-                <a
-                  href="#projects"
-                  className="focus-ring inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/80 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-all hover:border-teal-500/50 hover:bg-slate-800"
-                >
-                  Explore Live Projects <ChevronRight size={16} />
-                </a>
-
-                <div className="flex items-center gap-1.5 pl-1">
-                  <a
-                    href="https://portfolio-ganesh-mishra.vercel.app/"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="focus-ring rounded-xl border border-slate-800 bg-slate-900/80 p-3 text-slate-400 transition-all hover:border-teal-500/50 hover:text-accent"
-                    aria-label="Live Portfolio Website"
-                    title="https://portfolio-ganesh-mishra.vercel.app/"
-                  >
-                    <Globe size={20} />
-                  </a>
-                  <a
-                    href="https://github.com/leviwof"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="focus-ring rounded-xl border border-slate-800 bg-slate-900/80 p-3 text-slate-400 transition-all hover:border-slate-700 hover:text-white"
-                    aria-label="GitHub Profile"
-                  >
-                    <GithubIcon size={20} />
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/ganeshmishra-dev/"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="focus-ring rounded-xl border border-slate-800 bg-slate-900/80 p-3 text-slate-400 transition-all hover:border-slate-700 hover:text-white"
-                    aria-label="LinkedIn Profile"
-                  >
-                    <LinkedinIcon size={20} />
-                  </a>
-                </div>
-              </div>
-
-              {/* Stat Chips */}
-              <div className="mt-12 grid grid-cols-3 gap-4 border-t border-slate-800/80 pt-8 max-w-xl">
-                <div>
-                  <div className="text-2xl font-extrabold text-white sm:text-3xl">3+</div>
-                  <div className="text-xs text-slate-400 mt-1">Years Experience</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-extrabold text-accent sm:text-3xl">100k+</div>
-                  <div className="text-xs text-slate-400 mt-1">Users Served</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-extrabold text-indigo-400 sm:text-3xl">40%</div>
-                  <div className="text-xs text-slate-400 mt-1">Faster Deployments</div>
+              {/* Technical detail — a code panel, not a portrait */}
+              <div
+                className="relative animate-fade-up lg:justify-self-end"
+                style={{ animationDelay: '0.12s' }}
+              >
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -inset-6 -z-10 opacity-30"
+                  style={{
+                    backgroundImage:
+                      'radial-gradient(circle, rgba(148,163,184,0.18) 1px, transparent 1px)',
+                    backgroundSize: '18px 18px',
+                    maskImage: 'radial-gradient(closest-side, black, transparent)',
+                    WebkitMaskImage: 'radial-gradient(closest-side, black, transparent)',
+                  }}
+                />
+                <div className="animate-float overflow-hidden rounded-card-lg border border-ink-border/70 bg-ink-card/60 shadow-card backdrop-blur-sm">
+                  <div className="flex items-center gap-2 border-b border-ink-border/60 px-4 py-3">
+                    <span className="h-3 w-3 rounded-full bg-slate-600/70" />
+                    <span className="h-3 w-3 rounded-full bg-slate-600/70" />
+                    <span className="h-3 w-3 rounded-full bg-slate-600/70" />
+                    <span className="ml-3 font-mono text-xs text-slate-500">api/checkout/route.js</span>
+                  </div>
+                  <div className="overflow-x-auto whitespace-pre p-5 font-mono text-[11px] leading-relaxed text-slate-300 sm:text-xs">
+                    <div><span className="text-brand-purple">export async function</span> <span className="text-brand-cyan">POST</span>(req) {'{'}</div>
+                    <div>  <span className="text-brand-purple">const</span> order = <span className="text-brand-purple">await</span> <span className="text-brand-cyan">createOrder</span>(req)</div>
+                    <div>  <span className="text-brand-purple">await</span> payments.<span className="text-brand-cyan">charge</span>(order)   <span className="text-slate-500">// Stripe · Razorpay</span></div>
+                    <div>  <span className="text-brand-purple">await</span> db.orders.<span className="text-brand-cyan">insert</span>(order)</div>
+                    <div>  <span className="text-brand-purple">return</span> <span className="text-brand-cyan">Response</span>.json(order, {'{'} status: <span className="text-brand-emerald">201</span> {'}'})</div>
+                    <div>{'}'}<span className="ml-1 inline-block h-3.5 w-1.5 translate-y-0.5 animate-pulse bg-accent align-middle" aria-hidden="true" /></div>
+                  </div>
                 </div>
               </div>
             </div>
-
-            {/* Profile Avatar Card with Glowing Frame */}
-            <div className="relative mx-auto w-full max-w-md lg:mx-0">
-              <div className="relative rounded-3xl border border-slate-800 bg-slate-900/60 p-4 backdrop-blur-2xl shadow-2xl shadow-indigo-500/10">
-                <div className="relative aspect-square overflow-hidden rounded-2xl border border-slate-700/80 bg-slate-950">
-                  <img
-                    src={profilePhoto}
-                    alt="Ganesh Mishra"
-                    className="h-full w-full object-cover object-[50%_22%]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60" />
-                </div>
-
-                {/* Floating Skill Chips */}
-                <div className="absolute -bottom-3 -left-3 rounded-2xl border border-slate-800 bg-slate-900/90 px-4 py-2.5 text-xs font-semibold text-slate-200 shadow-xl backdrop-blur-xl">
-                  <span className="mr-2 inline-block h-2.5 w-2.5 rounded-full bg-accent animate-pulse" />
-                  Full-Stack Architecture
-                </div>
-
-                <div className="absolute -top-3 -right-3 rounded-2xl border border-slate-800 bg-slate-900/90 px-4 py-2.5 text-xs font-semibold text-slate-200 shadow-xl backdrop-blur-xl flex items-center gap-2">
-                  <Zap size={14} className="text-amber-400" /> React &amp; Node.js Expert
-                </div>
-              </div>
-            </div>
-          </div>
+          </Container>
         </section>
 
         {/* ABOUT SECTION */}
