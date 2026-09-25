@@ -1,11 +1,7 @@
 import { ArrowUpRight } from 'lucide-react'
 import { Card } from '../ui'
 import { cn } from '../../lib/cn'
-
-const DOT_GRID = {
-  backgroundImage: 'radial-gradient(circle, rgba(148,163,184,0.16) 1px, transparent 1px)',
-  backgroundSize: '16px 16px',
-}
+import { ProjectCover } from './ProjectCover'
 
 // Category accent bar — a single restrained hue per project, nothing louder.
 const ACCENT_BAR = {
@@ -20,7 +16,7 @@ function Domain({ url }) {
   if (!url) return null
   const host = url.replace(/^https?:\/\//, '').replace(/\/+$/, '')
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-md border border-ink-border bg-ink/70 px-2.5 py-1 font-mono text-[11px] text-slate-400">
+    <span className="inline-flex items-center gap-1.5 rounded-md border border-ink-border bg-ink/70 px-2.5 py-1 font-mono text-[11px] text-slate-400 backdrop-blur-sm">
       <span className="h-1.5 w-1.5 rounded-full bg-brand-emerald" />
       {host}
     </span>
@@ -28,43 +24,35 @@ function Domain({ url }) {
 }
 
 /**
- * Preview — a real screenshot when one exists, otherwise a designed brand
- * cover (never a fabricated screenshot). Set `image` in the project data to
- * upgrade any card to a real capture.
+ * Preview — a real screenshot when one exists, otherwise a designed thematic
+ * cover keyed to the project's domain (never a fabricated screenshot). Set
+ * `image` in the project data to upgrade any card to a real capture.
  */
 function Preview({ project, className }) {
-  const { image, title, category, liveUrl, accent = 'emerald' } = project
+  const { image, title, category, liveUrl, accent = 'emerald', theme } = project
   return (
     <div className={cn('relative overflow-hidden bg-ink-dark', className)}>
       <span aria-hidden className={cn('absolute inset-x-0 top-0 z-10 h-0.5', ACCENT_BAR[accent])} />
       {image ? (
-        <>
-          <img
-            src={image}
-            alt={`${title} — ${category}`}
-            loading="lazy"
-            decoding="async"
-            className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-transparent"
-          />
-        </>
+        <img
+          src={image}
+          alt={`${title} — ${category}`}
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+        />
       ) : (
-        <div className="relative flex h-full w-full flex-col items-center justify-center px-6 py-10 text-center">
-          <div aria-hidden className="pointer-events-none absolute inset-0 opacity-60" style={DOT_GRID} />
-          <span className="relative font-display text-2xl font-bold tracking-tight text-slate-500 sm:text-3xl">
-            {title}
-          </span>
-          <span className="relative mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-600">
-            {category}
-          </span>
-          {liveUrl && (
-            <div className="relative mt-4">
-              <Domain url={liveUrl} />
-            </div>
-          )}
+        <div className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
+          <ProjectCover theme={theme} accent={accent} />
+        </div>
+      )}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-transparent"
+      />
+      {liveUrl && (
+        <div className="absolute bottom-3 left-3 z-10">
+          <Domain url={liveUrl} />
         </div>
       )}
     </div>

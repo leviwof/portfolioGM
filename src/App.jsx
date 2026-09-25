@@ -4,9 +4,9 @@ import { ArrowUpRight, Mail, Check, Copy, Monitor, Cpu, Cloud } from 'lucide-rea
 import { GithubIcon, LinkedinIcon } from './components/icons'
 import { Navbar, Container, Section } from './components/layout'
 import { Button, Card, SectionHeading, Reveal } from './components/ui'
-import { WorkCard } from './components/work'
+import { WorkRow } from './components/work'
 import { metrics, services } from './data/services'
-import { featuredWork, productWork } from './data/work'
+import { selectedWork } from './data/work'
 import { skillGroups } from './data/skills'
 import { experience } from './data/experience'
 
@@ -215,29 +215,8 @@ function App() {
             />
           </Reveal>
 
-          {/* Featured — strongest visual treatment */}
-          <p className="mt-14 font-mono text-xs uppercase tracking-[0.2em] text-accent">Featured Work</p>
-          <div className="mt-6 grid gap-6 lg:grid-cols-2">
-            {featuredWork.slice(0, 2).map((project, i) => (
-              <Reveal key={project.id} delay={i * 80} className="h-full">
-                <WorkCard project={project} variant="feature" />
-              </Reveal>
-            ))}
-          </div>
-          <Reveal className="mt-6">
-            <WorkCard project={featuredWork[2]} variant="wide" />
-          </Reveal>
-
-          {/* Product & interface craft */}
-          <p className="mt-16 font-mono text-xs uppercase tracking-[0.2em] text-accent">
-            Product &amp; Interface Work
-          </p>
-          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {productWork.map((project, i) => (
-              <Reveal key={project.id} delay={i * 80} className="h-full">
-                <WorkCard project={project} variant="compact" />
-              </Reveal>
-            ))}
+          <div className="mt-12">
+            <WorkRow items={selectedWork} />
           </div>
         </Section>
 
