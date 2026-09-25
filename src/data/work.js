@@ -35,7 +35,7 @@ export const selectedWork = [
     isNew: true,
     image: null,
     liveUrl: 'https://testdino.vercel.app/',
-    cta: { label: 'Try TestDino', href: 'https://testdino.vercel.app/' },
+    cta: { label: 'View Case Study', href: '/work/testdino' },
   },
   {
     id: 'firsthuman',
@@ -48,7 +48,7 @@ export const selectedWork = [
     theme: 'business',
     image: null,
     liveUrl: 'https://dukaan-digital-phi.vercel.app/',
-    cta: { label: 'View Project', href: 'https://dukaan-digital-phi.vercel.app/' },
+    cta: { label: 'View Case Study', href: '/work/firsthuman' },
   },
   {
     id: 'ai-learning-assistant',
