@@ -1,31 +1,77 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: dark;
-  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-  background-color: #0b0f17;
-  color: #f8fafc;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+/* ----------------------------------------------------------------------------
+   Base — typography & foundations
+   Fonts (Inter / Plus Jakarta Sans / JetBrains Mono) are loaded once in
+   index.html via <link>. Do NOT re-import them here (avoids a duplicate,
+   render-blocking request).
+---------------------------------------------------------------------------- */
+@layer base {
+  :root {
+    color-scheme: dark;
+    font-synthesis: none;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ink font-sans text-slate-300 antialiased;
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Headings use the display family; balance keeps ragged lines tidy. */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-white;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Accessible focus ring on anything interactive. */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:not([tabindex='-1']):focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-ink;
+  }
+
+  ::selection {
+    background: rgba(45, 212, 191, 0.28);
+    color: #ffffff;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
+/* Respect users who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: #0b0f17;
-  overflow-x: hidden;
-}
-
-/* Custom Scrollbar */
+/* Subtle, premium scrollbar. */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -40,11 +86,12 @@ body {
   background: #334155;
 }
 
-::selection {
-  background: rgba(45, 212, 191, 0.3);
-  color: #ffffff;
-}
-
+/* ----------------------------------------------------------------------------
+   Component helpers
+   Prefer the <Container>, <Section>, <Button>, <Card>, <Tag> primitives for
+   all new work. The classes below are retained so the current (pre-redesign)
+   sections keep rendering unchanged during the migration.
+---------------------------------------------------------------------------- */
 @layer components {
   .shell {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
@@ -72,16 +119,13 @@ body {
   }
 }
 
-/* Realistic frame dots & browser bar styles */
+/* Device frame / ambient glow helpers used by the current project cards. */
 .device-frame-browser {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 2px rgba(255, 255, 255, 0.1);
 }
-
-/* Ambient glow dots */
 .glow-bg-teal {
   background: radial-gradient(circle, rgba(45, 212, 191, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
 }
 .glow-bg-indigo {
   background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
 }
-
