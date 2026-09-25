@@ -5,6 +5,7 @@ import { GithubIcon, LinkedinIcon } from './components/icons'
 import { Navbar, Container, Section } from './components/layout'
 import { Button, Card, Tag, SectionHeading, Reveal } from './components/ui'
 import { WorkRow } from './components/work'
+import { MoreWorkGrid } from './components/more-work'
 import { ExperienceTimeline } from './components/experience'
 import { cn } from './lib/cn'
 import { metrics, services } from './data/services'
@@ -281,6 +282,21 @@ function App() {
                 {education.duration}
               </p>
             </div>
+          </div>
+        </Section>
+
+        {/* MORE WORK — secondary, curated archive (lighter than Selected Work) */}
+        <Section id="more-work">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Archive"
+              title="More Work"
+              description="A collection of additional products, experiments, interfaces, and engineering projects."
+            />
+          </Reveal>
+
+          <div className="mt-10">
+            <MoreWorkGrid />
           </div>
         </Section>
 
