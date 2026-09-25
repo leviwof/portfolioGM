@@ -203,12 +203,12 @@ function Principle({ eyebrow, title, body }) {
         <Reveal>
           <div className="max-w-3xl">
             {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-            <blockquote
+            <h2
               className="mt-6 pl-5 font-display text-2xl font-semibold leading-snug text-white sm:text-3xl"
               style={{ borderLeftColor: 'var(--case-accent)', borderLeftWidth: '3px' }}
             >
               {title}
-            </blockquote>
+            </h2>
             {body && <p className="mt-6 max-w-2xl leading-relaxed text-slate-400">{body}</p>}
           </div>
         </Reveal>

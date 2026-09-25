@@ -7,6 +7,7 @@ import { MoreWorkGrid } from './components/more-work'
 import { ExperienceTimeline } from './components/experience'
 import { ContactSection } from './components/contact'
 import { cn } from './lib/cn'
+import { useDocumentMeta } from './lib/useDocumentMeta'
 import { metrics, services } from './data/services'
 import { selectedWork } from './data/work'
 import { technicalFocus } from './data/skills'
@@ -14,6 +15,12 @@ import { experience } from './data/experience'
 import { aboutParagraphs, capabilities, education } from './data/about'
 
 function App() {
+  useDocumentMeta({
+    title: 'Ganesh Mishra | Full-Stack Engineer',
+    description:
+      'Ganesh Mishra is a Full-Stack Engineer building production-ready web products with React, Next.js, Node.js, NestJS, PostgreSQL, and cloud infrastructure.',
+  })
+
   return (
     <div id="top" className="min-h-screen bg-ink text-slate-100 selection:bg-accent/30 selection:text-white">
       {/* Skip link — first focusable element for keyboard/AT users. */}

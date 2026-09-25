@@ -7,8 +7,8 @@ import { Rocket, Server, Wrench, Cloud, Plug } from 'lucide-react'
 export const metrics = [
   { value: '3+', label: 'Years Experience' },
   { value: '100K+', label: 'Users Supported' },
-  { value: '35%', label: 'API Latency Reduction' },
-  { value: '30%', label: 'Faster Feature Delivery' },
+  { value: '30%', label: 'API Latency Reduction' },
+  { value: '20%', label: 'Faster Feature Delivery' },
 ]
 
 /**

@@ -89,43 +89,11 @@
 /* ----------------------------------------------------------------------------
    Component helpers
    Prefer the <Container>, <Section>, <Button>, <Card>, <Tag> primitives for
-   all new work. The classes below are retained so the current (pre-redesign)
-   sections keep rendering unchanged during the migration.
+   layout and UI. The one helper below is a shared focus ring for the handful
+   of custom interactive elements that aren't built on those primitives.
 ---------------------------------------------------------------------------- */
 @layer components {
-  .shell {
-    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
-  }
-  .section {
-    @apply scroll-mt-20 border-t border-slate-800/60 py-20 sm:py-28 relative;
-  }
-  .eyebrow {
-    @apply mb-3 inline-flex items-center gap-2 rounded-full border border-teal-500/20 bg-teal-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-accent backdrop-blur-md;
-  }
-  .section-title {
-    @apply text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl;
-  }
-  .section-copy {
-    @apply mt-4 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg;
-  }
-  .tag {
-    @apply inline-flex items-center gap-1 rounded-md border border-slate-800 bg-slate-900/80 px-2.5 py-1 text-xs font-medium text-slate-300 transition-all hover:border-slate-700 hover:bg-slate-800 hover:text-white;
-  }
   .focus-ring {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-ink;
   }
-  .glass-card {
-    @apply rounded-2xl border border-slate-800/80 bg-slate-900/40 backdrop-blur-xl transition-all duration-300 hover:border-slate-700/80 hover:bg-slate-900/70 hover:shadow-2xl hover:shadow-teal-500/5;
-  }
-}
-
-/* Device frame / ambient glow helpers used by the current project cards. */
-.device-frame-browser {
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 2px rgba(255, 255, 255, 0.1);
-}
-.glow-bg-teal {
-  background: radial-gradient(circle, rgba(239, 68, 68, 0.15) 0%, rgba(10, 10, 10, 0) 70%);
-}
-.glow-bg-indigo {
-  background: radial-gradient(circle, rgba(220, 38, 38, 0.14) 0%, rgba(10, 10, 10, 0) 70%);
 }

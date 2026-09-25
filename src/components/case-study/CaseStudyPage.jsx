@@ -3,6 +3,7 @@ import CaseTopBar from './CaseTopBar'
 import CaseHero from './CaseHero'
 import CaseSection from './CaseSections'
 import CaseFooterNav from './CaseFooterNav'
+import { useDocumentMeta } from '../../lib/useDocumentMeta'
 
 // Project brand hue → hex, mirroring ProjectCover. Exposed to the subtree as
 // the --case-accent CSS variable so section renderers can accent themselves
@@ -24,11 +25,12 @@ export default function CaseStudyPage({ data }) {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    document.title = `${data.title} — Ganesh Mishra`
-    return () => {
-      document.title = 'Ganesh Mishra'
-    }
-  }, [data.title])
+  }, [data.slug])
+
+  useDocumentMeta({
+    title: data.seo?.title || `${data.title} — Ganesh Mishra`,
+    description: data.seo?.description,
+  })
 
   return (
     <div className="min-h-screen bg-ink text-slate-100" style={{ '--case-accent': accent }}>

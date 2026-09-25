@@ -5,6 +5,7 @@ import App from './App'
 import ZenzioCaseStudy from './pages/ZenzioCaseStudy'
 import TestDinoCaseStudy from './pages/TestDinoCaseStudy'
 import FirstHumanCaseStudy from './pages/FirstHumanCaseStudy'
+import NotFound from './pages/NotFound'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -15,6 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/work/zenzio" element={<ZenzioCaseStudy />} />
         <Route path="/work/testdino" element={<TestDinoCaseStudy />} />
         <Route path="/work/firsthuman" element={<FirstHumanCaseStudy />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

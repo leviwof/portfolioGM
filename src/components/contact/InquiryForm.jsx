@@ -26,17 +26,38 @@ function validate(values) {
 }
 
 /**
- * INTEGRATION POINT — no backend/email service is wired up yet.
+ * DELIVERY — no server or email backend is wired up, so this does NOT post to
+ * an endpoint that would silently drop the lead. Instead it hands the completed
+ * inquiry to the visitor's own email client through a pre-filled `mailto:` to
+ * the real address in `site.email`; the visitor sends it themselves, so nothing
+ * is falsely reported as "received."
  *
- * This validates the form and drives the loading + success states, but it does
- * NOT deliver the message anywhere. To make submissions real, replace the body
+ * INTEGRATION POINT: to deliver inquiries server-side instead (a smoother,
+ * inline success without leaving the page), replace the `mailto:` hand-off
  * below with a call to your service (an API route, Formspree, Resend, EmailJS,
- * …) that resolves on success and rejects on failure. Until then, treat any
- * submitted lead as NOT received.
+ * …) that resolves on success and rejects on failure. The submitting →
+ * success/error flow around this call already handles both outcomes.
  */
-async function sendInquiry(payload) {
-  await new Promise((resolve) => setTimeout(resolve, 900)) // simulate network latency
-  return payload
+function buildInquiryMailto(values) {
+  const subject = `Project inquiry — ${values.name}${values.company ? ` · ${values.company}` : ''}`
+  const body = [
+    `Name: ${values.name}`,
+    `Email: ${values.email}`,
+    values.company && `Company / Product: ${values.company}`,
+    values.budget && `Budget: ${values.budget}`,
+    values.timeline && `Timeline: ${values.timeline}`,
+    '',
+    'What I’m building:',
+    values.building,
+  ]
+    .filter(Boolean)
+    .join('\n')
+  return `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+}
+
+async function sendInquiry(values) {
+  window.location.href = buildInquiryMailto(values)
+  return values
 }
 
 const fieldBase =
@@ -109,9 +130,17 @@ export function InquiryForm() {
         <span className="flex h-12 w-12 items-center justify-center rounded-full border border-accent/40 bg-accent/10 text-accent">
           <Check size={22} />
         </span>
-        <h3 className="mt-5 font-display text-xl font-semibold text-white">Thanks.</h3>
+        <h3 className="mt-5 font-display text-xl font-semibold text-white">Just hit send.</h3>
         <p className="mt-2 max-w-sm text-sm leading-relaxed text-slate-400">
-          Your project details have been received. I&apos;ll get back to you soon.
+          I&apos;ve opened your email app with your project details ready to go — send it and it
+          lands straight in my inbox. If nothing opened, email me directly at{' '}
+          <a
+            href={`mailto:${site.email}`}
+            className="font-semibold text-accent underline-offset-2 hover:underline"
+          >
+            {site.email}
+          </a>
+          .
         </p>
         <button
           type="button"

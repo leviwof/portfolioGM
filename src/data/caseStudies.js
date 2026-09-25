@@ -13,6 +13,11 @@ export const caseStudies = {
     category: 'Case Study · Production Engineering',
     accent: 'emerald',
     theme: 'delivery',
+    seo: {
+      title: 'Zenzio | Food Delivery Platform Case Study | Ganesh Mishra',
+      description:
+        'How Ganesh Mishra architected and built the backend for Zenzio — a multi-platform food delivery ecosystem with real-time order tracking, payments, phone-number masking, and a React admin portal, taken from zero to production.',
+    },
     hero: {
       meta: [
         { label: 'Role', value: 'Backend / Full-Stack Engineer' },
@@ -145,6 +150,11 @@ export const caseStudies = {
     accent: 'cyan',
     theme: 'interview',
     isNew: true,
+    seo: {
+      title: 'TestDino | AI Interview Preparation Product | Ganesh Mishra',
+      description:
+        'TestDino turns a job description into a focused, personalized interview preparation plan — targeted questions, flashcards, and a day-by-day schedule. Product design and full-stack build by Ganesh Mishra.',
+    },
     hero: {
       meta: [
         { label: 'Role', value: 'Product Designer / Full-Stack Engineer' },
@@ -248,6 +258,11 @@ export const caseStudies = {
     category: 'Case Study · Business Platform',
     accent: 'indigo',
     theme: 'business',
+    seo: {
+      title: 'FirstHuman | Business Digital Product | Ganesh Mishra',
+      description:
+        'FirstHuman is a business platform focused on making a modern digital presence simple and approachable. Product design and frontend engineering by Ganesh Mishra.',
+    },
     hero: {
       meta: [
         { label: 'Role', value: 'Product Designer / Frontend Engineer' },

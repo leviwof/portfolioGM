@@ -30,10 +30,10 @@ src/
     layout/    Container, Section, Navbar — width, vertical-rhythm & the global nav
     ui/        Button, Card, Tag, Badge, Eyebrow, SectionHeading
   data/        Content, decoupled from presentation:
-               site.js, skills.js, experience.js, projects.js
-  lib/         cn() className helper
+               site.js, services.js, work.js, caseStudies.js, experience.js …
+  lib/         cn() className helper, useDocumentMeta() title/description hook
   App.jsx      Page composition (sections)
-  index.css    Base typography, reduced-motion, legacy helpers
+  index.css    Base typography, reduced-motion, focus-ring helper
 ```
 
 Import primitives via the barrels:
