@@ -5,8 +5,9 @@ import {
 } from 'lucide-react'
 
 import { GithubIcon, LinkedinIcon } from './components/icons'
-import { Navbar, Container } from './components/layout'
-import { Button } from './components/ui'
+import { Navbar, Container, Section } from './components/layout'
+import { Button, Card, SectionHeading } from './components/ui'
+import { metrics, services } from './data/services'
 import { skillGroups } from './data/skills'
 import { experience } from './data/experience'
 import { projects } from './data/projects'
@@ -238,6 +239,52 @@ function App() {
             </div>
           </Container>
         </section>
+
+        {/* TRUST METRICS */}
+        <div className="border-t border-ink-border/60 bg-ink-dark/20">
+          <Container>
+            <div className="grid grid-cols-2 gap-y-10 py-12 md:grid-cols-4 md:gap-y-0">
+              {metrics.map((m) => (
+                <div
+                  key={m.label}
+                  className="flex flex-col items-center px-6 text-center md:border-l md:border-ink-border/60 md:first:border-l-0"
+                >
+                  <span className="font-display text-3xl font-bold text-white sm:text-4xl">
+                    {m.value}
+                  </span>
+                  <span className="mt-2 font-mono text-[11px] uppercase tracking-[0.15em] text-slate-500 sm:text-xs">
+                    {m.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </div>
+
+        {/* SERVICES */}
+        <Section id="services">
+          <SectionHeading
+            eyebrow="Services"
+            title="What I Can Help You Build"
+            description="Focused engagements across the full stack — each aimed at a real business outcome, not just shipping code."
+          />
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((service) => {
+              const Icon = service.icon
+              return (
+                <Card key={service.title} interactive className="flex flex-col gap-4 p-6">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-ink-border bg-ink-light/50 text-accent">
+                    <Icon size={20} />
+                  </span>
+                  <div>
+                    <h3 className="font-display text-lg font-semibold text-white">{service.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-400">{service.description}</p>
+                  </div>
+                </Card>
+              )
+            })}
+          </div>
+        </Section>
 
         {/* ABOUT SECTION */}
         <section id="about" className="section">
