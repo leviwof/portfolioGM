@@ -1,40 +1,29 @@
-import { Terminal, Monitor, Database, Cloud, ShieldCheck } from 'lucide-react'
-
 /**
- * Technical stack grouped by domain. Presented as categorized tags — no
- * percentage/skill bars, per the design direction.
+ * Technical focus — grouped by domain and shown as compact text lists,
+ * never as logo walls, star ratings, or proficiency bars (per the design
+ * direction). The goal is scannable breadth, not an exhaustive inventory.
  */
-export const skillGroups = [
+export const technicalFocus = [
   {
-    title: 'Backend Engineering',
-    icon: Terminal,
-    color: 'text-teal-400 bg-teal-500/10 border-teal-500/20',
-    skills: ['Node.js', 'Express.js', 'NestJS', 'Socket.io', 'PHP', 'Java', 'Python', 'RESTful APIs', 'GraphQL', 'Microservices'],
+    title: 'Backend',
+    items: ['Node.js', 'NestJS', 'Express.js', 'TypeScript', 'REST APIs', 'Microservices'],
   },
   {
-    title: 'Frontend & UI Frameworks',
-    icon: Monitor,
-    color: 'text-indigo-400 bg-indigo-500/10 border-indigo-500/20',
-    skills: ['JavaScript (ES6+)', 'TypeScript', 'React.js', 'Redux', 'Next.js', 'Vue.js', 'Tailwind CSS', 'HTML5/CSS3', 'Flutter'],
+    title: 'Frontend',
+    items: ['React.js', 'Next.js', 'Redux', 'Tailwind CSS', 'HTML', 'CSS'],
   },
   {
-    title: 'Databases & Storage',
-    icon: Database,
-    color: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
-    skills: ['MongoDB', 'PostgreSQL', 'MySQL', 'Supabase', 'Firebase', 'Redis'],
+    title: 'Data',
+    items: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'Prisma', 'SQL Optimization'],
   },
   {
-    title: 'Cloud & DevOps Architecture',
-    icon: Cloud,
-    color: 'text-purple-400 bg-purple-500/10 border-purple-500/20',
-    skills: ['AWS (EC2/S3)', 'Microsoft Azure', 'Docker', 'Jenkins', 'GitHub Actions', 'CI/CD Pipelines', 'PM2', 'Nginx'],
+    title: 'Cloud & DevOps',
+    items: ['AWS', 'Azure', 'Docker', 'GitHub Actions', 'Jenkins', 'CI/CD', 'Linux'],
   },
   {
-    title: 'Security & Integrations',
-    icon: ShieldCheck,
-    color: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
-    skills: ['JWT Authentication', 'RBAC', 'Razorpay Gateway', 'Firebase Services', 'LLM / OpenAI API', 'Kafka', 'Git', 'Linux / Shell'],
+    title: 'Integrations',
+    items: ['Razorpay', 'JWT', 'OAuth', 'Webhooks', 'Socket.IO', 'GraphQL'],
   },
 ]
 
-export default skillGroups
+export default technicalFocus

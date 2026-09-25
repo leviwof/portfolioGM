@@ -1,15 +1,17 @@
 import { useState } from 'react'
-import { ArrowUpRight, Mail, Check, Copy, Monitor, Cpu, Cloud } from 'lucide-react'
+import { ArrowUpRight, Mail, Check, Copy } from 'lucide-react'
 
 import { GithubIcon, LinkedinIcon } from './components/icons'
 import { Navbar, Container, Section } from './components/layout'
-import { Button, Card, SectionHeading, Reveal } from './components/ui'
+import { Button, Card, Tag, SectionHeading, Reveal } from './components/ui'
 import { WorkRow } from './components/work'
+import { ExperienceTimeline } from './components/experience'
+import { cn } from './lib/cn'
 import { metrics, services } from './data/services'
 import { selectedWork } from './data/work'
-
-import { skillGroups } from './data/skills'
+import { technicalFocus } from './data/skills'
 import { experience } from './data/experience'
+import { aboutParagraphs, capabilities, education } from './data/about'
 
 function App() {
   const [copied, setCopied] = useState(false)
@@ -168,44 +170,6 @@ function App() {
           </div>
         </Section>
 
-        {/* ABOUT SECTION */}
-        <section id="about" className="section">
-          <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-            <div>
-              <span className="eyebrow">01 — About Me</span>
-              <h2 className="section-title">
-                A pragmatic developer driven by performance &amp; user experience.
-              </h2>
-            </div>
-            <div className="space-y-6">
-              <p className="text-lg leading-relaxed text-slate-300/90">
-                I specialize in building full-stack applications that combine high-availability backend microservices with sleek, intuitive user interfaces. My software engineering journey spans fintech platforms, automated AI workflows, e-commerce applications, and touchscreen kiosk solutions.
-              </p>
-              <p className="text-base leading-relaxed text-slate-400">
-                Whether creating custom REST/GraphQL APIs with Node.js &amp; NestJS, designing modern UI interfaces in React &amp; Tailwind CSS, or deploying containers to AWS with CI/CD automation, I emphasize clean architecture, robust security, and real business outcomes.
-              </p>
-
-              <div className="grid grid-cols-2 gap-4 pt-4 sm:grid-cols-3">
-                <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
-                  <Monitor className="mb-2 text-accent" size={24} />
-                  <h4 className="font-semibold text-white text-sm">Frontend UI/UX</h4>
-                  <p className="mt-1 text-xs text-slate-400">React, Next.js, Tailwind, Interactive Kiosks</p>
-                </div>
-                <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
-                  <Cpu className="mb-2 text-indigo-400" size={24} />
-                  <h4 className="font-semibold text-white text-sm">Backend &amp; APIs</h4>
-                  <p className="mt-1 text-xs text-slate-400">Node.js, NestJS, REST, GraphQL, Microservices</p>
-                </div>
-                <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-4">
-                  <Cloud className="mb-2 text-purple-400" size={24} />
-                  <h4 className="font-semibold text-white text-sm">DevOps &amp; Cloud</h4>
-                  <p className="mt-1 text-xs text-slate-400">AWS EC2, Docker, CI/CD Actions, PM2</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* SELECTED WORK */}
         <Section id="work">
           <Reveal>
@@ -221,93 +185,134 @@ function App() {
           </div>
         </Section>
 
-        {/* SKILLS SECTION */}
-        <section id="skills" className="section">
-          <div className="shell">
-            <span className="eyebrow">03 — Technical Stack</span>
-            <h2 className="section-title">Tools &amp; Frameworks.</h2>
-            <p className="section-copy">
-              A comprehensive technical stack across web interfaces, backend microservices, databases, cloud DevOps, and security integrations.
-            </p>
+        {/* EXPERIENCE */}
+        <Section id="experience">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Experience"
+              title="Building production software"
+              description="Across fintech, food delivery, and business platforms."
+            />
+          </Reveal>
+          <ExperienceTimeline items={experience} />
+        </Section>
 
-            <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {skillGroups.map((group) => {
-                const GroupIcon = group.icon
-                return (
-                  <div
-                    key={group.title}
-                    className="glass-card flex flex-col p-6"
+        {/* ABOUT */}
+        <Section id="about">
+          <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+            <div className="lg:sticky lg:top-28 lg:self-start">
+              <SectionHeading
+                eyebrow="About"
+                title="Full-stack engineering, from idea to production."
+              />
+            </div>
+            <div>
+              <div className="space-y-5">
+                {aboutParagraphs.map((p, i) => (
+                  <p
+                    key={i}
+                    className={cn(
+                      'leading-relaxed',
+                      i === 0 ? 'text-lg text-slate-200' : 'text-base text-slate-400',
+                    )}
                   >
-                    <div className="flex items-center gap-3">
-                      <div className={`flex h-10 w-10 items-center justify-center rounded-xl border ${group.color}`}>
-                        <GroupIcon size={20} />
-                      </div>
-                      <h3 className="font-bold text-white text-base">{group.title}</h3>
-                    </div>
+                    {p}
+                  </p>
+                ))}
+              </div>
 
-                    <div className="mt-6 flex flex-wrap gap-2">
-                      {group.skills.map((skill) => (
-                        <span key={skill} className="tag">
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )
-              })}
+              <div className="mt-10 grid gap-4 sm:grid-cols-2">
+                {capabilities.map((c, i) => (
+                  <Card key={c.title} className="p-5">
+                    <span className="font-mono text-xs text-slate-600">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <h3 className="mt-2 font-display text-base font-semibold text-white">
+                      {c.title}
+                    </h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-slate-400">
+                      {c.description}
+                    </p>
+                  </Card>
+                ))}
+              </div>
             </div>
           </div>
-        </section>
+        </Section>
 
-        {/* EXPERIENCE SECTION */}
-        <section id="experience" className="section">
-          <div className="shell">
-            <span className="eyebrow">04 — Career Journey</span>
-            <h2 className="section-title">Where I’ve Made Impact.</h2>
+        {/* TECHNICAL FOCUS */}
+        <Section id="skills">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Technical Focus"
+              title="The tools I work with"
+              description="Grouped by area so the breadth is easy to scan — no logo walls, no ratings."
+            />
+          </Reveal>
 
-            <div className="relative mt-14 ml-3 border-l-2 border-slate-800 pl-8 sm:ml-4 sm:pl-12 space-y-12">
-              {experience.map((job, index) => (
-                <article key={job.company} className="relative group">
-                  <span className="absolute -left-[2.55rem] top-1.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-accent bg-ink sm:-left-[3.55rem]">
-                    <span className="h-2 w-2 rounded-full bg-accent" />
-                  </span>
+          <div className="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+            {technicalFocus.map((group, i) => (
+              <Reveal key={group.title} delay={i * 60}>
+                <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500">
+                  {group.title}
+                </h3>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {group.items.map((item) => (
+                    <Tag key={item}>{item}</Tag>
+                  ))}
+                </div>
+              </Reveal>
+            ))}
+          </div>
 
-                  <div className="glass-card p-6 sm:p-8">
-                    <div className="flex flex-wrap items-start justify-between gap-4">
-                      <div>
-                        <div className="flex items-center gap-3">
-                          <h3 className="text-xl font-bold text-white">{job.company}</h3>
-                          {job.badge && (
-                            <span className="rounded-full bg-teal-500/10 border border-teal-500/30 px-3 py-0.5 text-xs font-semibold text-accent">
-                              {job.badge}
-                            </span>
-                          )}
-                        </div>
-                        <p className="mt-1 text-base font-medium text-slate-300">{job.role}</p>
-                      </div>
-
-                      <div className="text-xs font-medium text-slate-400 sm:text-right">
-                        <p className="rounded-md border border-slate-800 bg-slate-900/60 px-3 py-1 text-slate-300">
-                          {job.duration}
-                        </p>
-                        <p className="mt-1 text-slate-400">{job.location}</p>
-                      </div>
-                    </div>
-
-                    <ul className="mt-6 space-y-3 text-sm leading-relaxed text-slate-300/90">
-                      {job.bullets.map((bullet, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                          <span>{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </article>
-              ))}
+          {/* Education — deliberately compact; kept lighter than Experience. */}
+          <div className="mt-16 border-t border-ink-border/60 pt-8">
+            <span className="font-mono text-xs uppercase tracking-[0.18em] text-slate-500">
+              Education
+            </span>
+            <div className="mt-3 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+              <div>
+                <h3 className="font-display text-base font-semibold text-white">
+                  {education.degree}
+                </h3>
+                <p className="text-sm text-slate-400">{education.institution}</p>
+              </div>
+              <p className="font-mono text-xs uppercase tracking-[0.15em] text-slate-500">
+                {education.duration}
+              </p>
             </div>
           </div>
-        </section>
+        </Section>
+
+        {/* TRANSITION CTA */}
+        <Section>
+          <Reveal>
+            <div className="relative overflow-hidden rounded-card-lg border border-ink-border/70 bg-ink-card/40 px-6 py-14 text-center shadow-card sm:px-12 sm:py-16">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-accent/10 blur-[100px]"
+              />
+              <div className="relative mx-auto max-w-2xl">
+                <h2 className="text-display-lg text-white">
+                  Need an engineer who can own the implementation?
+                </h2>
+                <p className="mt-4 text-base leading-relaxed text-slate-400 sm:text-lg">
+                  Whether you&apos;re building an MVP, extending an existing product, or need
+                  ongoing engineering support, let&apos;s discuss what you&apos;re building.
+                </p>
+                <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+                  <Button href="#contact" size="lg" className="w-full sm:w-auto">
+                    Let&apos;s Work Together
+                    <ArrowUpRight size={18} />
+                  </Button>
+                  <Button href="#work" variant="secondary" size="lg" className="w-full sm:w-auto">
+                    View Selected Work
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </Section>
 
         {/* CONTACT SECTION */}
         <section id="contact" className="section">
