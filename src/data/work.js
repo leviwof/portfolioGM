@@ -51,6 +51,20 @@ export const selectedWork = [
     cta: { label: 'View Case Study', href: '/work/firsthuman' },
   },
   {
+    id: 'clover-store',
+    title: 'Clover',
+    positioning: 'Premium fashion storefront with an editorial, quiet-luxury feel',
+    description:
+      'A luxury fashion storefront built around editorial product presentation — curated collections, category browsing, product detail pages, search, and a shopping bag — in a restrained, minimal shopping experience.',
+    category: 'E-commerce',
+    accent: 'purple',
+    theme: 'commerce',
+    isNew: true,
+    image: null,
+    liveUrl: 'https://clover-store-nine.vercel.app/',
+    cta: { label: 'View Project', href: 'https://clover-store-nine.vercel.app/' },
+  },
+  {
     id: 'ai-learning-assistant',
     title: 'AI Learning Assistant',
     positioning: 'Conversational AI for personalized learning',

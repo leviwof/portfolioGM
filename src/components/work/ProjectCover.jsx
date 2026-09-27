@@ -97,7 +97,24 @@ function Wellness({ c }) {
   )
 }
 
-const GLYPHS = { delivery: Delivery, interview: Interview, business: Business, ai: Ai, nature: Nature, wellness: Wellness }
+function Commerce({ c }) {
+  return (
+    <g fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      {/* shopping bag */}
+      <rect x="148" y="100" width="104" height="92" rx="10" stroke={c} strokeOpacity="0.5" fill={c} fillOpacity="0.05" />
+      <path d="M152 122 H248" strokeOpacity="0.35" strokeWidth="2" />
+      {/* handle */}
+      <path d="M176 100 v-6 a24 22 0 0 1 48 0 v6" strokeOpacity="0.8" />
+      {/* price tag */}
+      <path d="M186 156 L200 142 H236 V170 H200 Z" fill={c} fillOpacity="0.1" strokeOpacity="0.8" />
+      <circle cx="199" cy="151" r="3" fill={c} stroke="none" />
+      {/* sparkle — quiet-luxury accent */}
+      <path d="M298 62 L303 74 L315 79 L303 84 L298 96 L293 84 L281 79 L293 74 Z" fill={c} fillOpacity="0.85" stroke="none" />
+    </g>
+  )
+}
+
+const GLYPHS = { delivery: Delivery, interview: Interview, business: Business, ai: Ai, nature: Nature, wellness: Wellness, commerce: Commerce }
 
 export function ProjectCover({ theme = 'business', accent = 'emerald', className }) {
   const c = HUE[accent] || HUE.emerald
