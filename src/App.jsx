@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowDownToLine, ArrowUpRight } from 'lucide-react'
 
 import { Navbar, Container, Section, SiteFooter } from './components/layout'
 import { Button, Card, Tag, SectionHeading, Reveal } from './components/ui'
@@ -13,6 +13,7 @@ import { selectedWork } from './data/work'
 import { technicalFocus } from './data/skills'
 import { experience } from './data/experience'
 import { aboutParagraphs, capabilities, education } from './data/about'
+import { site } from './data/site'
 
 function App() {
   useDocumentMeta({
@@ -78,6 +79,16 @@ function App() {
                   </Button>
                   <Button href="#contact" variant="secondary" size="lg" className="w-full sm:w-auto">
                     Let&apos;s Work Together
+                  </Button>
+                  <Button
+                    href={`/${site.resumeFile}`}
+                    download
+                    variant="outline"
+                    size="lg"
+                    className="w-full sm:w-auto"
+                  >
+                    Download Resume
+                    <ArrowDownToLine size={18} />
                   </Button>
                 </div>
 

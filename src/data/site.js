@@ -30,6 +30,7 @@ export const nav = {
     { label: 'Experience', href: '#experience' },
     { label: 'About', href: '#about' },
   ],
+  resume: { label: 'Download Resume', href: '/Ganesh_Mishra_Resume.pdf' },
   cta: { label: "Let's Work Together", href: '#contact' },
 }
 

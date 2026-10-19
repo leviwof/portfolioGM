@@ -76,8 +76,15 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:block">
+          {/* Desktop actions */}
+          <div className="hidden items-center gap-4 md:flex">
+            <a
+              href={nav.resume.href}
+              download
+              className="text-sm font-medium text-slate-300 transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none"
+            >
+              {nav.resume.label}
+            </a>
             <Button href={nav.cta.href} size="sm">
               {nav.cta.label}
             </Button>
@@ -127,6 +134,14 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
+          <a
+            href={nav.resume.href}
+            download
+            onClick={() => setOpen(false)}
+            className="mt-3 block rounded-lg px-3 py-3.5 text-base font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-white"
+          >
+            {nav.resume.label}
+          </a>
           <div className="mt-4 border-t border-ink-border/60 pt-5">
             <Button href={nav.cta.href} size="lg" className="w-full" onClick={() => setOpen(false)}>
               {nav.cta.label}
