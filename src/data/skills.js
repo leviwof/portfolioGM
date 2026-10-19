@@ -10,19 +10,19 @@ export const technicalFocus = [
   },
   {
     title: 'Frontend',
-    items: ['React.js', 'Next.js', 'Redux', 'Tailwind CSS', 'HTML', 'CSS'],
+    items: ['React.js', 'Next.js', 'Redux', 'Vue.js', 'React Native', 'Flutter', 'Tailwind CSS'],
   },
   {
     title: 'Data',
-    items: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'Prisma', 'SQL Optimization'],
+    items: ['PostgreSQL', 'Azure Database for PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'Firebase', 'Supabase', 'Prisma'],
   },
   {
     title: 'Cloud & DevOps',
-    items: ['AWS', 'Azure', 'Docker', 'GitHub Actions', 'Jenkins', 'CI/CD', 'Linux'],
+    items: ['Microsoft Azure', 'AWS', 'Docker', 'Kubernetes', 'Azure DevOps', 'GitHub Actions', 'Jenkins', 'CI/CD', 'Linux'],
   },
   {
     title: 'Integrations',
-    items: ['Razorpay', 'JWT', 'OAuth', 'Webhooks', 'Socket.IO', 'GraphQL'],
+    items: ['JWT', 'OAuth 2.0', 'Razorpay', 'Vodafone Voice API', 'Webhooks', 'Socket.IO', 'GraphQL'],
   },
 ]
 

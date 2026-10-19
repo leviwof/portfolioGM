@@ -62,8 +62,8 @@ function App() {
 
                 <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
                   I&apos;m <span className="font-semibold text-white">Ganesh Mishra</span>, a Full-Stack
-                  Engineer with 3+ years of experience building production systems across fintech,
-                  food delivery, SaaS, and business applications.
+                  Developer with 3+ years of experience building production systems across food delivery,
+                  fintech, digital storefronts, and AI-powered applications.
                 </p>
 
                 <p className="mt-4 max-w-xl leading-relaxed text-slate-400">

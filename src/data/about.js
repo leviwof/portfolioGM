@@ -4,8 +4,8 @@
  * (no "expert in everything", no filler adjectives — real evidence only).
  */
 export const aboutParagraphs = [
-  "I'm Ganesh Mishra, a Full-Stack Engineer based in India with 3+ years of experience building production applications across fintech, food delivery, AI, SaaS and business workflows.",
-  'I work across the full product lifecycle: designing APIs, building React applications, working with databases, integrating third-party services, and deploying production systems on cloud infrastructure.',
+  "I'm Ganesh Mishra, a Full-Stack Developer based in India with 3+ years of experience building production applications across food delivery, fintech, digital storefronts, and AI-powered products.",
+  'I work across the full product lifecycle: designing APIs, building React applications, working with databases, integrating third-party services, and deploying production systems on Azure and AWS.',
   'My experience includes systems involving financial workflows, customer onboarding, payments, authentication, real-time communication, database optimization and cloud deployment.',
   'For startups and growing businesses, I can work as an extended engineering partner for new product development, feature development, backend/API work and ongoing technical support.',
 ]
